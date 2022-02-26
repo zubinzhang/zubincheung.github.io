@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Zubin</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Zubin Zhang"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Zubin Zhang"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="Zubin"><meta property="og:url" content="https://zubin.site/"><meta property="og:site_name" content="Zubin"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://zubin.site/img/og_image.png"><meta property="article:author" content="Zubin"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://zubin.site"},"headline":"Zubin","image":["https://zubin.site/img/og_image.png"],"author":{"@type":"Person","name":"Zubin"},"publisher":{"@type":"Organization","name":"Zubin","logo":{"@type":"ImageObject"}},"description":null}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Zubin</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-02-10T10:00:55.000Z" title="2/10/2019, 6:00:55 PM">2019-02-10</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">1 分钟读完 (大约151个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/42719bd.html">安装指定版本node</a></h1><div class="content"><p>mac 环境下,使用 homebrew 安装的 node, 默认是最高版本,如何安装指定版本的 node 呢?</p>
+<ol>
+<li><p>如果之前使用 <code>brew install node</code> 安装过 node,需要先执行<code>brew unlink node</code> 来<strong>解绑</strong>node。</p>
+</li>
+<li><p>查找可用的 node 版本 <code>brew search node</code>。</p>
+</li>
+<li><p>安装你需要的版本, 比如 <code>brew install node@10</code>。</p>
+</li>
+<li><p>然后 <code>brew link node@10</code>, 这一步可能会报错, 按照提示执行命令就 ok 了, 比如我最后执行的是 <code>brew link --overwrite --force node@10</code>。</p>
+</li>
+</ol>
+<p>node -v 不出意外, 就安装好了你想要的 node 版本。</p>
+<p>参考文档:</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c5c298486dbd">https://www.jianshu.com/p/c5c298486dbd</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-01-22T03:31:39.000Z" title="1/22/2019, 11:31:39 AM">2019-01-22</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">9 分钟读完 (大约1280个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/42728bd.html">JavaScript实现四则混合运算</a></h1><div class="content"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近在项目中需要自己解析四则混合运算，如果只是简单的加减乘除运算，我相信对大家来说没有任何困难，但是实现带括号的四则运算，还是有一定的难度的。</p>
+<ul>
+<li>操作数：小数、整数</li>
+<li>运算符：加、减、乘、除</li>
+<li>分界符：圆括号 ( ) ， 用于指示运算的先后顺序</li>
+</ul>
+<p>这里使用<strong>逆波兰表达式</strong>解决数值运算以及括号带来的优先级提升问题。</p>
+<h2 id="逆波兰表达式"><a href="#逆波兰表达式" class="headerlink" title="逆波兰表达式"></a>逆波兰表达式</h2><ul>
+<li><p>中缀表达式(Infix Notation)<br>是一个通用的算术或逻辑公式表示方法， 操作符是以中缀形式处于操作数的中间。比如<code>1 + 2 + 3</code></p>
+</li>
+<li><p>前缀表达式(Prefix Notation)<br>是指将运算符写在前面、操作数写在后面、不包含括号的表达式，而且为了纪念其发明者波兰数学家 Jan Lukasiewicz 所以前缀表达式也叫做<strong>波兰表达式</strong>。比如<code>- 1 + 2 3</code></p>
+</li>
+<li><p>后缀表达式(Postfix Notation)<br>与之相反，是指运算符写在操作数后面的不含括号的算术表达式，也叫做<strong>逆波兰表达式</strong>。比如<code>1 2 3 + -</code></p>
+</li>
+</ul>
+<p>前后缀表达式的出现是为了方便计算机处理，它的运算符是按照一定的顺序出现，所以求值过程中并不需要使用括号来指定运算顺序，也不需要考虑运算符号（比如加减乘除）的优先级。<strong>逆波兰表达式</strong>在编译技术中有着普遍的应用。</p>
+<h3 id="中缀表达式转换成后缀表达式算法："><a href="#中缀表达式转换成后缀表达式算法：" class="headerlink" title="中缀表达式转换成后缀表达式算法："></a>中缀表达式转换成后缀表达式算法：</h3><ol>
+<li>从左至右扫描一中缀表达式。</li>
+<li>若读取的是操作数，则判断该操作数的类型，并将该操作数存入操作数堆栈</li>
+<li>若读取的是运算符：<ol>
+<li>该运算符为左括号”(“，则直接存入运算符堆栈。</li>
+<li>该运算符为右括号”)”，则输出运算符堆栈中的运算符到操作数堆栈，直到遇到左括号为止。</li>
+<li>该运算符为非括号运算符：<ol>
+<li>若运算符堆栈栈顶的运算符为括号，则直接存入运算符堆栈。</li>
+<li>若比运算符堆栈栈顶的运算符优先级高或相等，则直接存入运算符堆栈。</li>
+<li>若比运算符堆栈栈顶的运算符优先级低或者优先级相等，则输出栈顶运算符到操作数堆栈，直到比运算符堆栈栈顶的运算符优先级低或者为空时才将当前运算符压入运算符堆栈。</li>
+</ol>
+</li>
+<li>当表达式读取完成后运算符堆栈中尚有运算符时，则依序取出运算符到操作数堆栈，直到运算符堆栈为空。</li>
+</ol>
+</li>
+</ol>
+<p>流程图如下所示：<br><img src="https://github.com/zubincheung/blog-images/blob/master/2018/reverse-polish.jpg?raw=true" alt=" "></p>
+<h3 id="逆波兰表达式求值算法："><a href="#逆波兰表达式求值算法：" class="headerlink" title="逆波兰表达式求值算法："></a>逆波兰表达式求值算法：</h3><ol>
+<li>循环扫描语法单元的项目。</li>
+<li>如果扫描的项目是操作数，则将其压入操作数堆栈，并扫描下一个项目。</li>
+<li>如果扫描的项目是一个二元运算符，则对栈的顶上两个操作数执行该运算。</li>
+<li>如果扫描的项目是一个一元运算符，则对栈的最顶上操作数执行该运算。</li>
+<li>将运算结果重新压入堆栈。</li>
+<li>重复步骤 2-5，堆栈中即为结果值。</li>
+</ol>
+<h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><ul>
+<li>中缀表达式转换成逆波兰表达式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> operatorRand = &#123;</span><br><span class="line">  <span class="string">&#x27;+&#x27;</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="string">&#x27;-&#x27;</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="string">&#x27;*&#x27;</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="string">&#x27;/&#x27;</span>: <span class="number">2</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 中缀表达式转换成逆波兰表达式</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string[]&#125;</span> </span>str 中缀表达式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convert</span>(<span class="params">inputArr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">Array</span>.isArray(inputArr) || inputArr.length === <span class="number">0</span>) <span class="keyword">return</span> [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> operatorArr = [];</span><br><span class="line">  <span class="keyword">const</span> outputArr = [];</span><br><span class="line"></span><br><span class="line">  inputArr.forEach(<span class="function"><span class="params">input</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">Number</span>.isNaN(<span class="built_in">Number</span>(input))) &#123;</span><br><span class="line">      <span class="comment">// 如果是数字，只接输出</span></span><br><span class="line">      outputArr.push(input);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (input === <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 如果是左括号，入操作符栈</span></span><br><span class="line">      operatorArr.push(input);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (input === <span class="string">&#x27;)&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 如果是右括号，循环输出，知道匹配到左括号为止</span></span><br><span class="line">      <span class="keyword">while</span> (operatorArr.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> operator = operatorArr.pop();</span><br><span class="line">        <span class="keyword">if</span> (operator === <span class="string">&#x27;(&#x27;</span>) <span class="keyword">break</span>;</span><br><span class="line">        outputArr.push(operator);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 如果是运算符</span></span><br><span class="line">      <span class="keyword">while</span> (operatorArr.length &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> topOperator = operatorArr[operatorArr.length - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果运算符栈为空，或者栈顶运算符是(，或者当前运算符优先级比栈顶运算符优先级高</span></span><br><span class="line">        <span class="keyword">if</span> (</span><br><span class="line">          operatorArr.length === <span class="number">0</span> ||</span><br><span class="line">          topOperator === <span class="string">&#x27;(&#x27;</span> ||</span><br><span class="line">          operatorRand[input] &gt; operatorRand[topOperator]</span><br><span class="line">        ) &#123;</span><br><span class="line">          operatorArr.push(input);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          outputArr.push(operatorArr.pop());</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 输入循环结束，如果运算符栈不为空，循环输出</span></span><br><span class="line">  <span class="keyword">while</span> (operatorArr.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    outputArr.push(operatorArr.pop());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> outputArr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>逆波兰算法求值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compute</span>(<span class="params">leftNum, rightNum, operator</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (operator) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> leftNum + rightNum;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> leftNum - rightNum;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> leftNum * rightNum;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="comment">// 除法</span></span><br><span class="line">      <span class="keyword">return</span> leftNum / rightNum;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 计算逆波兰表达式</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> </span>str 逆波兰表达式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">reversePolishArr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">Array</span>.isArray(reversePolishArr) || reversePolishArr.length === <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> tmpArr = [];</span><br><span class="line"></span><br><span class="line">  reversePolishArr.forEach(<span class="function"><span class="params">input</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">Number</span>.isNaN(<span class="built_in">Number</span>(input))) &#123;</span><br><span class="line">      <span class="comment">// 数字接直接push</span></span><br><span class="line">      tmpArr.push(<span class="built_in">Number</span>(input));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 运算符</span></span><br><span class="line">      <span class="keyword">const</span> num1 = tmpArr.pop();</span><br><span class="line">      <span class="keyword">const</span> num2 = tmpArr.pop();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">isNaN</span>(num1) || <span class="built_in">isNaN</span>(num2)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`无效的表达式：<span class="subst">$&#123;reversePolishArr.join(<span class="string">&#x27;,&#x27;</span>)&#125;</span>`</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      tmpArr.push(compute(num2, num1, input));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Number</span>(tmpArr[<span class="number">0</span>].toFixed(<span class="number">3</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完整代码请参考：<a target="_blank" rel="noopener" href="https://github.com/zubincheung/js-rpn">https://github.com/zubincheung/js-rpn</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-01-13T02:37:13.000Z" title="1/13/2019, 10:37:13 AM">2019-01-13</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">9 分钟读完 (大约1275个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/6dd28e9b.html">MySQL索引优化</a></h1><div class="content"><h3 id="不使用索引的情况"><a href="#不使用索引的情况" class="headerlink" title="不使用索引的情况"></a>不使用索引的情况</h3><ol>
+<li>如果 mysql 估计使用索引比全表扫描更慢，则不使用索引。<br>例如：如果 key_part 1 均匀分布在 1 和 100 之间，下列查询中使用索引就不是很好：</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">where</span> key_part1 <span class="operator">&gt;</span> <span class="number">1</span> <span class="keyword">and</span> key_part1 <span class="operator">&lt;</span> <span class="number">90</span>;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>如果使用 heap 表并且 where 条件中不用＝索引列，其他 &gt; 、 &lt; 、 &gt;= 、 &lt;= 均不使 用索引（MyISAM 和 innodb 表使用索引）；</p>
+</li>
+<li><p>使用 or 分割的条件，如果 or 前的条件中的列有索引，后面的列中没有索引，那么涉及到的索引都不会使用。</p>
+</li>
+<li><p>如果创建复合索引，如果条件中使用的列不是索引列的第一部分；（不是前缀索引）</p>
+</li>
+<li><p>如果 like 是以％开始；</p>
+</li>
+<li><p>对 where 后边条件为字符串的一定要加引号，字符串如果为数字 mysql 会自动转 为字符串，但是不使用索引。</p>
+</li>
+</ol>
+<h3 id="查看索引使用情况"><a href="#查看索引使用情况" class="headerlink" title="查看索引使用情况"></a>查看索引使用情况</h3><p>如果索引正在工作， Handler_read_key 的值将很高，这个值代表了一个行被索引值读的次数，很低的值表明增加索引得到的性能改善不高，因为索引并不经常使 用。</p>
+<p>Handler_read_rnd_next 的值高则意味着查询运行低效，并且应该建立索引补救。这个值的含义是在数据文件中读下一行的请求数。如果你正进行大量的表扫描，</p>
+<p>该值较高。通常说明表索引不正确或写入的查询没有利用索引。</p>
+<p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> status <span class="keyword">like</span> <span class="string">&#x27;Handler_read%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="具体优化查询语句"><a href="#具体优化查询语句" class="headerlink" title="具体优化查询语句"></a>具体优化查询语句</h3><ol>
+<li>应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，建议使用默认值</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num <span class="keyword">is</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"># 可以在 num 上设置默认值 <span class="number">0</span>，确保表中 num 列没有 <span class="keyword">null</span> 值</span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>应尽量避免在 where 子句中使用!=或&lt;&gt;操作符</li>
+</ol>
+<p>MySQL 只有对以下操作符才使用索引：&lt;，&lt;=，=，&gt;，&gt;=，BETWEEN，IN，以及某些时候的 LIKE。</p>
+<p>可以在 LIKE 操作中使用索引的情形是指另一个操作数不是以通配符（%或者_）开头的情形。例如:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> col <span class="keyword">LIKE</span> <span class="string">&#x27;Mich%&#x27;</span>; # 这个查询将使用索引，</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> id <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> col <span class="keyword">LIKE</span> <span class="string">&#x27;%ike&#x27;</span>; #这个查询不会使用索引。</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>应尽量避免在 where 子句中使用 or 来连接条件,所有的 or 条件都必须是独立索引</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">10</span> <span class="keyword">or</span> num<span class="operator">=</span><span class="number">20</span>;</span><br><span class="line"># 可以使用 <span class="keyword">UNION</span> 合并查询：</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">10</span> <span class="keyword">union</span> <span class="keyword">all</span> <span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>in 和 not in 也要慎用</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num <span class="keyword">in</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line">对于连续的数值，能用 <span class="keyword">between</span> 就不要用 <span class="keyword">in</span> 了：</span><br><span class="line"></span><br><span class="line"><span class="keyword">Select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num <span class="keyword">between</span> <span class="number">1</span> <span class="keyword">and</span> <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>如果在 where 子句中使用参数，也会导致全表扫描。</li>
+</ol>
+<p>因为 SQL 只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推 迟到运行时；它必须在编译时进行选择。然而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="variable">@num</span>;</span><br><span class="line"># 可以改为强制查询使用索引</span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">with</span>(index(索引名)) <span class="keyword">where</span> num<span class="operator">=</span><span class="variable">@num</span>;</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>应尽量避免在 where 子句中对字段进行表达式操作</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">/</span><span class="number">2</span><span class="operator">=</span><span class="number">100</span>;</span><br><span class="line"># 应改为:</span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">100</span>\<span class="operator">*</span><span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>应尽量避免在 where 子句中对字段进行函数操作</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> <span class="built_in">substring</span>(name,<span class="number">1</span>,<span class="number">3</span>)<span class="operator">=</span><span class="string">&#x27;abc&#x27;</span>; <span class="comment">--name</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> datediff(<span class="keyword">day</span>,createdate,<span class="string">&#x27;2005-11-30&#x27;</span>)<span class="operator">=</span><span class="number">0</span>; <span class="comment">--‘2005-11-30’</span></span><br><span class="line">#  应改为:</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> name <span class="keyword">like</span> <span class="string">&#x27;abc%&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> createdate<span class="operator">&gt;=</span><span class="string">&#x27;2005-11-30&#x27;</span> <span class="keyword">and</span> createdate<span class="operator">&lt;</span><span class="string">&#x27;2005-12-1&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<ol start="9">
+<li>很多时候用 exists 代替 in 是一个好的选择：</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> num <span class="keyword">from</span> a <span class="keyword">where</span> num <span class="keyword">in</span>(<span class="keyword">select</span> num <span class="keyword">from</span> b);</span><br><span class="line">用下面的语句替换：</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> num <span class="keyword">from</span> a <span class="keyword">where</span> <span class="keyword">exists</span>(<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">from</span> b <span class="keyword">where</span> num<span class="operator">=</span>a.num);</span><br></pre></td></tr></table></figure>
+<ol start="10">
+<li>并不是所有索引对查询都有效，</li>
+</ol>
+<p>SQL 是根据表中数据来进行查询优化的，当索引列有大量数据重复时，SQL 查询可能不会去利用索引，如一表中有字段 sex，male、female 几乎各一半，那么即使在 sex 上建了索引也对查询效率起不了作用。</p>
+<ol start="11">
+<li>索引并不是越多越好，</li>
+</ol>
+<p>索引固然可以提高相应的 select 的效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时有可能会重建索引，所以怎样建索引需要慎重考虑，视具体情况而定。一个表的索引数最好不要超过 6 个，若太多则应考虑一些不常使用到的列上建的索引是否有必要。</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-01-05T02:13:33.000Z" title="1/5/2019, 10:13:33 AM">2019-01-05</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">6 分钟读完 (大约948个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/43a71ae4.html">MySQL索引小结</a></h1><div class="content"><h3 id="索引的作用"><a href="#索引的作用" class="headerlink" title="索引的作用"></a>索引的作用</h3><p>索引的出现其实就是为了提高数据查询的效率，用于快速找出在某个列中有一特定值的行。</p>
+<h3 id="索引的常见模型"><a href="#索引的常见模型" class="headerlink" title="索引的常见模型"></a>索引的常见模型</h3><p>实现索引的方式却有很多种,常见的索引模型有<strong>哈希表</strong>、<strong>有序数组</strong>、<strong>搜索树</strong></p>
+<ul>
+<li>哈希表：键 - 值(key - value)<ul>
+<li>哈希的思路：把值放在数组里，用一个哈希函数把 key 换算成一个确定的位置，然后把 value 放在数组的这个位置</li>
+<li>哈希冲突的处理办法：链表</li>
+<li>适用场景：只有等值查询的场景</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>有序数组：按顺序存储。<ul>
+<li>查询用二分法就可以快速查询，时间复杂度是：O(log(N))</li>
+<li>优点：在等值查询和范围查询场景中的性能就都非常优秀</li>
+<li>缺点：往中间插入一个记录就必须得挪动后面所有的记录，更新效率低</li>
+<li>适用场景：静态存储引擎。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>二叉搜索树<ul>
+<li>特点：每个节点的左儿子小于父节点，父节点又小于右儿子</li>
+<li>查询时间复杂度： O(log(N))</li>
+<li>更新时间复杂度： O(log(N))</li>
+<li>适用场景：数据库存储大多不适用二叉树，因为树高过高，会适用 N 叉树</li>
+</ul>
+</li>
+</ul>
+<h3 id="InnoDB-中的索引模型"><a href="#InnoDB-中的索引模型" class="headerlink" title="InnoDB 中的索引模型"></a>InnoDB 中的索引模型</h3><p>在 InnoDB 中，表都是根据主键顺序以索引的形式存放的，这种存储方式的表称为索引组织表。InnoDB 使用了 B+ 树索引模型，所以数据都是存储在 B+ 树中的。</p>
+<h3 id="索引类型：主键索引、非主键索引"><a href="#索引类型：主键索引、非主键索引" class="headerlink" title="索引类型：主键索引、非主键索引"></a>索引类型：主键索引、非主键索引</h3><ul>
+<li>主键索引的叶子节点存的是整行的数据(聚簇索引)</li>
+<li>非主键索引的叶子节点内容是主键的值(二级索引)</li>
+<li>区别：主键索引只要搜索 ID 这个 B+Tree 即可拿到数据。普通索引先搜索索引拿到主键值，再到主键索引树搜索一次(<strong>回表</strong>)</li>
+</ul>
+<h3 id="索引维护"><a href="#索引维护" class="headerlink" title="索引维护"></a>索引维护</h3><ul>
+<li>一个数据页满了，按照 B+Tree 算法，新增加一个数据页，叫做<strong>页分裂</strong>，会导致性能下降。空间利用率降低大概 50%。</li>
+<li>当相邻的两个数据页利用率很低的时候会做<strong>数据页合并</strong>，合并的过程是分裂过程的<strong>逆</strong>过程。</li>
+<li>从性能和存储空间方面考量，<strong>自增主键</strong>往往是更合理的选择。</li>
+</ul>
+<h3 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><p>回到主键索引树搜索的过程，我们称为<strong>回表</strong></p>
+<p>如果查询条件使用的是普通索引（或是联合索引的最左原则字段），查询结果是联合索引的字段或是主键，不用回表操作，直接返回结果，减少 IO 磁盘读写读取正行数据</p>
+<h3 id="最左前缀"><a href="#最左前缀" class="headerlink" title="最左前缀"></a>最左前缀</h3><p><strong>联合索引</strong>的最左 N 个字段，也可以是<strong>字符串索引</strong>的最左 M 个字符</p>
+<h3 id="联合索引"><a href="#联合索引" class="headerlink" title="联合索引"></a>联合索引</h3><p>根据创建联合索引的顺序，以最<strong>左</strong>原则进行 where 检索，比如（age，name）以 age=1 或 age= 1 and name=‘张三’可以使用索引，单以 name=‘张三’ 不会使用索引，考虑到存储空间的问题，还请根据业务需求，将查找频繁的数据进行靠左创建索引。</p>
+<h3 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a>索引下推</h3><p><code>like &#39;hello%’and age &gt;10</code> 检索，MySQL5.6 版本之前，会对匹配的数据进行回表查询。5.6 版本后，会先过滤掉 age&lt;10 的数据，再进行回表查询，减少回表率，提升检索速度</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-12-28T09:13:19.000Z" title="12/28/2018, 5:13:19 PM">2018-12-28</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">5 分钟读完 (大约786个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/76482d89.html">日志框架winston的使用</a></h1><div class="content"><p>日志对于问题定位、调试，系统性能调优至关重要，尤其是系统复杂以及在线运行的情况下。之前的项目日志输出一直用 log4js,输出到一个文件，最近对那一块进行重构。</p>
+<p>分别考虑了两款 Node.js 框架，分别是<strong>Bunyan</strong> 和 <strong>Winston</strong>。</p>
+<ul>
+<li>Winston 是 Node.js 最流行的日志框架之一，设计为一个简单通用的日志库，支持多传输</li>
+<li>Bunyan 以略微不同的方式处理结构化，机器可读性被重点对待。实际上就是 JSON.stringify 的一个输出。</li>
+</ul>
+<h3 id="预期效果"><a href="#预期效果" class="headerlink" title="预期效果"></a>预期效果</h3><ul>
+<li>日志分级</li>
+<li>根据不同的代码分层来产生不同的 log 输出到不同的文件。</li>
+<li>输出到 log 文件同时还可以选择输出到标准输出。</li>
+<li>自定义格式化日志输出，输出到标准输出的格式便于读取，输出到 log 文件的格式便于分析。</li>
+<li>按天自动切割日志文件。</li>
+</ul>
+<h3 id="为何选择-winston"><a href="#为何选择-winston" class="headerlink" title="为何选择 winston"></a>为何选择 winston</h3><ul>
+<li>github start 数多。</li>
+<li>更加灵活，可以灵活的组织 transport，来完成比较复杂的日志输出任务。</li>
+<li>日志格式为 json 字符串，方便后期分析，当然可以自定义 format.</li>
+<li>支持简单的 log 分析，Profiling。</li>
+<li>支持 stream Api。</li>
+<li>简单 Log Query Api，当然无法和专业的日志分析工具比。</li>
+</ul>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><h4 id="定义标准输出-Transport"><a href="#定义标准输出-Transport" class="headerlink" title="定义标准输出 Transport"></a>定义标准输出 Transport</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConsoleTransport</span> <span class="keyword">extends</span> <span class="title">winston</span>.<span class="title">transports</span>.<span class="title">Console</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">options</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(options);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.format = winston.format.combine(</span><br><span class="line">      winston.format(<span class="function"><span class="params">info</span> =&gt;</span> &#123;</span><br><span class="line">        info.hostname = hostname();</span><br><span class="line">        info.pid = process.pid;</span><br><span class="line">        info.level = info.level.toUpperCase();</span><br><span class="line">        <span class="keyword">return</span> info;</span><br><span class="line">      &#125;)(),</span><br><span class="line">      winston.format.timestamp(&#123; <span class="attr">format</span>: <span class="string">&#x27;YYYY-MM-DD HH:mm:ss,SSSS&#x27;</span> &#125;),</span><br><span class="line">      winston.format.ms(),</span><br><span class="line">      winston.format.colorize(),</span><br><span class="line">      winston.format.printf(options.formatter),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="定义文件输出"><a href="#定义文件输出" class="headerlink" title="定义文件输出"></a>定义文件输出</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> winston = <span class="built_in">require</span>(<span class="string">&#x27;winston&#x27;</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;winston-daily-rotate-file&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FileTransport</span> <span class="keyword">extends</span> <span class="title">winston</span>.<span class="title">transports</span>.<span class="title">DailyRotateFile</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">options</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(options);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.datePattern = <span class="string">&#x27;YYYY-MM-DD&#x27;</span>;</span><br><span class="line">    <span class="built_in">this</span>.zippedArchive = <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">this</span>.maxSize = <span class="string">&#x27;100m&#x27;</span>;</span><br><span class="line">    <span class="built_in">this</span>.maxFiles = <span class="string">&#x27;14d&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> defaultFormatter = winston.format.combine(</span><br><span class="line">      winston.format(<span class="function"><span class="params">info</span> =&gt;</span> &#123;</span><br><span class="line">        info.hostname = hostname();</span><br><span class="line">        info.pid = process.pid;</span><br><span class="line">        info.level = info.level.toUpperCase();</span><br><span class="line">        <span class="keyword">return</span> info;</span><br><span class="line">      &#125;)(),</span><br><span class="line">      winston.format.timestamp(&#123; <span class="attr">format</span>: <span class="string">&#x27;YYYY-MM-DD HH:mm:ss,SSSS&#x27;</span> &#125;),</span><br><span class="line">      winston.format.ms(),</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (options.json) &#123;</span><br><span class="line">      <span class="comment">// 输出json格式</span></span><br><span class="line">      <span class="built_in">this</span>.format = winston.format.combine(</span><br><span class="line">        defaultFormatter,</span><br><span class="line">        winston.format.json(options.formatter),</span><br><span class="line">      );</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.format = winston.format.combine(</span><br><span class="line">        defaultFormatter,</span><br><span class="line">        winston.format.printf(options.formatter),</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  name: <span class="string">&#x27;app&#x27;</span>,</span><br><span class="line">  <span class="built_in">module</span>: <span class="string">&#x27;app&#x27;</span>,</span><br><span class="line">  filePath: <span class="string">&#x27;./logs&#x27;</span>,</span><br><span class="line">  formatter: <span class="function"><span class="params">meta</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;meta.timestamp&#125;</span> <span class="subst">$&#123;meta.level&#125;</span> <span class="subst">$&#123;meta.hostname&#125;</span> <span class="subst">$&#123;meta.pid&#125;</span> (<span class="subst">$&#123;meta.ms&#125;</span>) [<span class="subst">$&#123;</span></span></span><br><span class="line"><span class="string"><span class="subst">      meta.<span class="built_in">module</span></span></span></span><br><span class="line"><span class="string"><span class="subst">    &#125;</span>] <span class="subst">$&#123;meta.message&#125;</span>`</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  consoleLevel: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">  json: <span class="literal">false</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> consoleTransport = <span class="keyword">new</span> ConsoleTransport(&#123;</span><br><span class="line">  level: options.consoleLevel,</span><br><span class="line">  name: options.name,</span><br><span class="line">  formatter: options.consoleFormatter,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> infoTransport = <span class="keyword">new</span> FileTransport(&#123;</span><br><span class="line">  level: <span class="string">&#x27;info&#x27;</span>,</span><br><span class="line">  name: options.name,</span><br><span class="line">  filename: join(options.filePath, <span class="string">`info/<span class="subst">$&#123;options.name&#125;</span>-info-%DATE%.log`</span>),</span><br><span class="line">  formatter: options.formatter,</span><br><span class="line">  json: options.json,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> errorTransport = <span class="keyword">new</span> FileTransport(&#123;</span><br><span class="line">  level: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">  name: options.name,</span><br><span class="line">  filename: join(options.filePath, <span class="string">&#x27;error/error-%DATE%.log&#x27;</span>),</span><br><span class="line">  formatter: options.formatter,</span><br><span class="line">  json: options.json,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> transports = [consoleTransport, infoTransport, errorTransport];</span><br><span class="line"><span class="keyword">const</span> logger = winston.createLogger(&#123; transports &#125;);</span><br><span class="line"></span><br><span class="line">logger.info(<span class="string">&#x27;log1&#x27;</span>);</span><br><span class="line">logger.error(<span class="string">&#x27;error 1&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>代码地址为：<a target="_blank" rel="noopener" href="https://github.com/zubincheung/cw-logger-winston">https://github.com/zubincheung/cw-logger-winston</a></p>
+<h3 id="输出效果"><a href="#输出效果" class="headerlink" title="输出效果"></a>输出效果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">2018-12-30 10:07:28,4605 INFO zubin-pc.local 59468 (+0ms) [app] app log 1</span><br><span class="line">2018-12-30 10:07:28,4695 ERROR zubin-pc.local 59468 (+1ms) [app] Error: app error 1</span><br><span class="line">Error: app error 1</span><br><span class="line">    at Object.it (&#x2F;Users&#x2F;zubincheung&#x2F;ciwong&#x2F;cw-logger-winston&#x2F;test&#x2F;cw-logger.test.js:61:35)</span><br><span class="line">    at Object.asyncJestTest (&#x2F;Users&#x2F;zubincheung&#x2F;ciwong&#x2F;cw-logger-winston&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmine_async.js:108:37)</span><br><span class="line">    at resolve (&#x2F;Users&#x2F;zubincheung&#x2F;ciwong&#x2F;cw-logger-winston&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queue_runner.js:56:12)</span><br><span class="line">    at new Promise (&lt;anonymous&gt;)</span><br><span class="line">    at mapper (&#x2F;Users&#x2F;zubincheung&#x2F;ciwong&#x2F;cw-logger-winston&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queue_runner.js:43:19)</span><br><span class="line">    at promise.then (&#x2F;Users&#x2F;zubincheung&#x2F;ciwong&#x2F;cw-logger-winston&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queue_runner.js:87:41)</span><br><span class="line">    at process.internalTickCallback (internal&#x2F;process&#x2F;next_tick.js:77:7)</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-12-21T09:14:16.000Z" title="12/21/2018, 5:14:16 PM">2018-12-21</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">6 分钟读完 (大约873个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/3ad6e1fc.html">CPU使用率</a></h1><div class="content"><h3 id="什么是-CPU-使用率"><a href="#什么是-CPU-使用率" class="headerlink" title="什么是 CPU 使用率"></a>什么是 CPU 使用率</h3><p><strong>CPU 使用率</strong>就是除了空闲时间外的其他时间占总 CPU 时间的百分比<br><img src="https://github.com/zubincheung/blog-images/blob/master/2018/3edcc7f908c7c1ddba4bbcccc0277c09.png?raw=true"></p>
+<p>事实上，为了计算 CPU 使用率，性能工具一般都会取间隔一段时间（比如 3 秒）的两次值，作差后，再计算出这段时间内的平均 CPU 使用率，即<br><img src="https://github.com/zubincheung/blog-images/blob/master/2018/8408bb45922afb2db09629a9a7eb1d5a.png?raw=true"></p>
+<p>需要注意的是，**&gt;性能分析工具给出的都是间隔一段时间的平均 CPU 使用率，所以要注意间隔时间的设置**，特别是用多个工具对比分析时，你一定要保证它们用的是相同的间隔时间。</p>
+<h3 id="怎么查看-CPU-使用率"><a href="#怎么查看-CPU-使用率" class="headerlink" title="怎么查看 CPU 使用率"></a>怎么查看 CPU 使用率</h3><ul>
+<li>top 显示了系统总体的 CPU 和内存使用情况，以及各个进程的资源使用情况。<ul>
+<li>系统的 CPU 使用率(%Cpu)</li>
+</ul>
+</li>
+<li>pidstat 专门分析每个进程 CPU 使用情况的工具<ul>
+<li>用户态 CPU 使用率 （%usr）；</li>
+<li>内核态 CPU 使用率（%system）；</li>
+<li>运行虚拟机 CPU 使用率（%guest）；</li>
+<li>等待 CPU 使用率（%wait）；</li>
+<li>以及总的 CPU 使用率（%CPU）。</li>
+</ul>
+</li>
+<li>perf 分析 CPU 性能问题</li>
+<li>pstree 用树状形式显示所有进程之间的关系,可以用来查找一个进程的父进程</li>
+<li>execsnoop 专为短时进程设计的工具</li>
+</ul>
+<h3 id="CPU-使用率过高怎么办？"><a href="#CPU-使用率过高怎么办？" class="headerlink" title="CPU 使用率过高怎么办？"></a>CPU 使用率过高怎么办？</h3><ul>
+<li><p>CPU 使用率是最直观和最常用的系统性能指标，更是我们在排查性能问题时，通常会关注的第一个指标。所以我们更要熟悉它的含义，尤其要弄清楚用户（%user）、Nice（%nice）、系统（%system） 、等待 I/O（%iowait） 、中断（%irq）以及软中断（%softirq）这几种不同 CPU 的使用率。比如说：</p>
+<ul>
+<li>用户 CPU 和 Nice CPU 高，说明用户态进程占用了较多的 CPU，所以应该着重排查进程的性能问题。</li>
+<li>系统 CPU 高，说明内核态占用了较多的 CPU，所以应该着重排查内核线程或者系统调用的性能问题。</li>
+<li>I/O 等待 CPU 高，说明等待 I/O 的时间比较长，所以应该着重排查系统存储是不是出现了 I/O 问题。</li>
+<li>软中断和硬中断高，说明软中断或硬中断的处理程序占用了较多的 CPU，所以应该着重排查内核中的中断服务程序。</li>
+</ul>
+</li>
+<li><p>碰到 CPU 使用率升高的问题，你可以借助 top、pidstat 等工具，确认引发 CPU 性能问题的来源；再使用 perf 等工具，排查出引起性能问题的具体函数。</p>
+</li>
+<li><p>碰到常规问题无法解释的 CPU 使用率情况时，首先要想到有可能是短时应用导致的问题，比如有可能是下面这两种情况。</p>
+<ul>
+<li>应用里直接调用了其他二进制程序，这些程序通常运行时间比较短，通过 top 等工具也不容易发现</li>
+<li>应用本身在不停地崩溃重启，而启动过程的资源初始化，很可能会占用相当多的 CPU</li>
+</ul>
+</li>
+</ul>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-12-17T03:27:20.000Z" title="12/17/2018, 11:27:20 AM">2018-12-17</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">10 分钟读完 (大约1480个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/21989671.html">CPU上下文切换</a></h1><div class="content"><h2 id="什么是-CPU-上下文切换"><a href="#什么是-CPU-上下文切换" class="headerlink" title="什么是 CPU 上下文切换"></a>什么是 CPU 上下文切换</h2><p><strong>CPU 寄存器</strong>，是 CPU 内置的容量小、但速度极快的内存。<strong>程序计数器</strong>，则是用来存储 CPU 正在执行的指令位置、或者即将执行的下一条指令位置。它们都是 CPU 在运行任何任务前，必须的依赖环境，因此也被叫做<strong>CPU 上下文</strong>。</p>
+<p><strong>CPU 上下文切换</strong>，就是先把前一个任务的 CPU 上下文（也就是 CPU 寄存器和程序计数器）保存起来，然后加载新任务的上下文到这些寄存器和程序计数器，最后再跳转到程序计数器所指的新位置，运行新任务。</p>
+<h3 id="进程上下文切换"><a href="#进程上下文切换" class="headerlink" title="进程上下文切换"></a>进程上下文切换</h3><blockquote>
+<p>Linux 按照特权等级，把进程的运行空间分为<strong>内核空间</strong>和<strong>用户空间</strong>。</p>
+</blockquote>
+<ul>
+<li>内核空间（Ring 0）具有最高权限，可以直接访问所有资源。</li>
+<li>用户空间（Ring 3）只能访问受限资源，不能直接访问内存等硬件设备，必须通过系统调用陷入到内核中，才能访问这些特权资源。</li>
+<li>系统调用(特权模式切换):一个进程用户态与内核态的互相转变</li>
+<li>上下文切换:从一个进程切换到另一个进程运行<ul>
+<li>虚拟内存、栈、全局变量等用户空间的资源</li>
+<li>内核堆栈、寄存器等内核空间的状态</li>
+</ul>
+</li>
+</ul>
+<p>一次系统调用的过程，发生了<strong>两</strong>次 CPU 上下文切换。</p>
+<h4 id="什么时候会发生？"><a href="#什么时候会发生？" class="headerlink" title="什么时候会发生？"></a>什么时候会发生？</h4><ul>
+<li>进程 CPU 时间片耗尽，被系统挂起，切换到其他正在等待 CPU 的进程</li>
+<li>系统资源不足时进程被系统挂起，系统调度其他进程运行</li>
+<li>进程通过睡眠函数 sleep 这样的方法将自己主动挂起</li>
+<li>有优先级更高的进程运行，当前程序会被挂起</li>
+<li>发生硬件中断，转而执行内核中的终端服务程序</li>
+</ul>
+<h3 id="线程上下文切换"><a href="#线程上下文切换" class="headerlink" title="线程上下文切换"></a>线程上下文切换</h3><h4 id="线程与进程的区别"><a href="#线程与进程的区别" class="headerlink" title="线程与进程的区别"></a>线程与进程的区别</h4><ul>
+<li>线程是调度的基本单位，而进程是资源拥有的基本单位</li>
+<li>当进程只有一个线程时，可以认为进程就等于线程</li>
+<li>当进程拥有多个线程时，这些线程会共享相同的虚拟内存和全局变量等资源，在上下文切换时，这些资源不需要修改</li>
+<li>线程有自己的私有数据，例如栈和寄存器等，在上下文切换时需要保存</li>
+</ul>
+<h4 id="什么时候会发生"><a href="#什么时候会发生" class="headerlink" title="什么时候会发生"></a>什么时候会发生</h4><ul>
+<li>前后两个线程属于不同进程。此时因为资源不共享，因此等同于进程上下文切换</li>
+<li>前后两个线程属于同一个进程，因为虚拟内存共享，所以只需要切换私有数据、寄存器等不共享的数据</li>
+</ul>
+<p>虽然同为上下文切换，但同进程内的线程切换，要比多进程间的切换消耗更少的资源，而这，也正是多线程代替多进程的一个优势。</p>
+<h3 id="中断上下文切换"><a href="#中断上下文切换" class="headerlink" title="中断上下文切换"></a>中断上下文切换</h3><ul>
+<li>中断处理会打断进程的正常调度和执行</li>
+<li>对同一个 CPU 来说，中断处理比进程拥有更高的优先级</li>
+</ul>
+<h2 id="怎么查看系统的上下文切换情况"><a href="#怎么查看系统的上下文切换情况" class="headerlink" title="怎么查看系统的上下文切换情况"></a>怎么查看系统的上下文切换情况</h2><h3 id="vmstat"><a href="#vmstat" class="headerlink" title="vmstat"></a>vmstat</h3><p>vmstat 是一个常用的系统性能分析工具，主要用来分析系统的内存使用情况，也常用来分析 CPU 上下文切换和中断的次数。</p>
+<ul>
+<li>需要特别关注的四列内容：<ul>
+<li>cs(context switch) 表示每秒上下文切换的次数</li>
+<li>in(interrupt)表示每秒中断次数</li>
+<li>r(Running or Runnable)表示就绪队列的长度，也就是正在运行和等待 CPU 的进程数</li>
+<li>b(Blocked)表示处于不可中断睡眠状态的进程数 #每隔 5 秒输出一组数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="pidstat"><a href="#pidstat" class="headerlink" title="pidstat"></a>pidstat</h3><p>vmstat 只给出了系统总体的上下文切换情况，要想查看每个进程的详细情况，就需要使用 pidstat 了。给它加上 -w 选项，你就可以查看每个进程上下文切换的情况了。</p>
+<ul>
+<li>需要特别关注的两列内容<ul>
+<li>cswch 表示每秒自愿上下文切换的次数</li>
+<li>nvcswch 表示每秒非自愿上下文切换的次数</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>自愿上下文切换：进程无法获取所需资源</li>
+<li>非自愿上下文切换：进程由于时间片已到等原因，被系统强制调度</li>
+</ul>
+<ul>
+<li>自愿上下文切换变多了，说明进程都在等待资源，有可能发生了 IO 等其他问题</li>
+<li>非自愿上下文切换变多了，说明进程都在被强制调度，即在争抢 CPU，说明 CPU 成为瓶颈</li>
+<li>中断次数变多了，说明 CPU 被中断处理程序占用，还需要通过查看/proc/interrupts 文件来分析具体的中断类型</li>
+</ul>
+<h2 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h2><p>不管是哪种场景导致的上下文切换，我们应该知道：</p>
+<ul>
+<li>CPU 上下文切换，是保证 Linux 系统正常工作的核心功能之一，一般情况下不需要我们特别关注。</li>
+<li>但过多的上下文切换，会把 CPU 时间消耗在寄存器、内核栈以及虚拟内存等数据的保存和恢复上，从而缩短进程真正运行的时间，导致系统的整体性能大幅下降。</li>
+</ul>
+<p>碰到上下文切换次数过多的问题时，<strong>我们可以借助 vmstat 、 pidstat 和 /proc/interrupts 等工具</strong>，来辅助排查性能问题的根源。</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-12-10T12:21:35.000Z" title="12/10/2018, 8:21:35 PM">2018-12-10</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></span><span class="level-item">2 分钟读完 (大约254个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/undefined.html">时区问题小结</a></h1><div class="content"><h2 id="修改基于-Alpine-的-Docker-容器的时区"><a href="#修改基于-Alpine-的-Docker-容器的时区" class="headerlink" title="修改基于 Alpine 的 Docker 容器的时区"></a>修改基于 Alpine 的 Docker 容器的时区</h2><h3 id="在容器中修改"><a href="#在容器中修改" class="headerlink" title="在容器中修改"></a>在容器中修改</h3><p>进入容器</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">＃ docker exec -it container_name <span class="regexp">/bin/</span>sh</span><br></pre></td></tr></table></figure>
+<p>安装 timezone,列出安装的时区文件，验证是否下载成功。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">＃ apk add -U tzdata</span><br><span class="line">＃ ls <span class="regexp">/usr/</span>share/zoneinfo</span><br></pre></td></tr></table></figure>
+<p>拷贝需要的时区文件到 localtime，国内需要的是 Asia/Shanghai：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">＃ cp <span class="regexp">/usr/</span>share<span class="regexp">/zoneinfo/</span>Asia<span class="regexp">/Shanghai /</span>etc/localtime</span><br></pre></td></tr></table></figure>
+<p>验证时区</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">＃ <span class="selector-tag">date</span></span><br><span class="line"><span class="selector-tag">Wed</span> <span class="selector-tag">Dec</span> 12 19<span class="selector-pseudo">:09</span><span class="selector-pseudo">:09</span> <span class="selector-tag">CST</span> 2018</span><br></pre></td></tr></table></figure>
+<p>CST 即为 中国标准时间。</p>
+<p>移除时区文件：</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">＃ apk <span class="built_in">del</span> tzdata</span><br></pre></td></tr></table></figure>
+<h3 id="在-Dockerfile-指定时区"><a href="#在-Dockerfile-指定时区" class="headerlink" title="在 Dockerfile 指定时区"></a>在 Dockerfile 指定时区</h3><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Install base packages, <span class="keyword">set</span> timezone</span><br><span class="line">RUN <span class="comment">apk update &amp;&amp; apk add curl bash tree tzdata</span></span><br><span class="line"></span><br><span class="line"># cp <span class="comment">-r -f</span> /usr/<span class="comment">share</span>/zoneinfo/<span class="comment">Asia</span>/Shanghai /<span class="comment">etc</span>/localtime</span><br><span class="line"></span><br><span class="line">ENV TZ Asia/<span class="comment">Shanghai</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Node-Js-中-sequelize-时区的配置方法"><a href="#Node-Js-中-sequelize-时区的配置方法" class="headerlink" title="Node.Js 中 sequelize 时区的配置方法"></a>Node.Js 中 sequelize 时区的配置方法</h2><p>sequelize 默认情况下，保存日期时会转换成 +00:00 时区</p>
+<h3 id="解决方式："><a href="#解决方式：" class="headerlink" title="解决方式："></a>解决方式：</h3><p>sequelize 时配置时区<br>timezone: ‘+08:00’</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sequelize = <span class="keyword">new</span> Sequelize(config.database, config.username, config.password, &#123;</span><br><span class="line">  host: config.host,</span><br><span class="line">  port: config.port,</span><br><span class="line">  dialect: <span class="string">&#x27;mysql&#x27;</span>,</span><br><span class="line">  pool: &#123;</span><br><span class="line">    max: <span class="number">5</span>,</span><br><span class="line">    min: <span class="number">0</span>,</span><br><span class="line">    idle: <span class="number">10000</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  timezone: <span class="string">&#x27;+08:00&#x27;</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://wiki.alpinelinux.org/wiki/Setting_the_timezone">Setting the timezone</a><br><a target="_blank" rel="noopener" href="http://docs.sequelizejs.com/class/lib/sequelize.js~Sequelize.html#instance-constructor-constructor">Sequelize.html#instance-constructor-constructor</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-11-25T05:40:27.000Z" title="11/25/2018, 1:40:27 PM">2018-11-25</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">5 分钟读完 (大约747个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/b2c34d5.html">JavaScript深入之类型转换</a></h1><div class="content"><p>JavaScript 是弱类型的语言，它的取值非常灵活。你期望一种类型值的时候，你可以提供任何类型的值，JavaScript 将根据需要自行转换类型，在 JavaScript 中通常将它们统称为 <strong>强制类型转换</strong>。</p>
+<p><a target="_blank" rel="noopener" href="https://www.ecma-international.org/ecma-262/#sec-toprimitive">ECMAScript 规范</a>中<a target="_blank" rel="noopener" href="https://www.ecma-international.org/ecma-262/#sec-type-conversion">Type Conversion</a> 章节中定义了转换规则。这里我们着重介绍 <strong><a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-toprimitive">ToPrimitive</a>**、</strong><a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-toboolean">ToBoolean</a><strong>、 **<a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-tonumber">ToNumber</a></strong> 和 <strong><a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-tostring">ToString</a></strong> 。</p>
+<h2 id="ToPrimitive"><a href="#ToPrimitive" class="headerlink" title="ToPrimitive"></a>ToPrimitive</h2><p>在 JavaScript 中，想要将对象转换成原始值，必然会调用 toPrimitive()内部函数，那么它是如何工作的呢？</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">ToPrimitive</span><span class="params">(input [, PreferredType])</span></span></span><br><span class="line"><span class="selector-tag">input</span> 是输入的值，preferedType 是期望转换的类型，</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">输入类型</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Undefined</td>
+<td align="left">返回 input 自身</td>
+</tr>
+<tr>
+<td align="left">Null</td>
+<td align="left">返回 input 自身</td>
+</tr>
+<tr>
+<td align="left">Boolean</td>
+<td align="left">返回 input 自身</td>
+</tr>
+<tr>
+<td align="left">Number</td>
+<td align="left">返回 input 自身</td>
+</tr>
+<tr>
+<td align="left">String</td>
+<td align="left">返回 input 自身</td>
+</tr>
+<tr>
+<td align="left">Symbol</td>
+<td align="left">返回 input 自身</td>
+</tr>
+<tr>
+<td align="left">Object</td>
+<td align="left">返回该对象的默认值。具体过程请（通过内部操作 DefaultValue ，参见 ES5 规范 8.12.8 节）</td>
+</tr>
+</tbody></table>
+<p>如果 PreferredType 是 Number，执行顺序如下：</p>
+<ol>
+<li>如果 input 为 primitive，返回。</li>
+<li>否则，input 为 Object。调用 obj.valueOf()。如果结果是 primitive，返回。</li>
+<li>否则，调用 obj.toString(). 如果结果是 primitive，返回。</li>
+<li>如果 valueOf() 和 toString() 均不返回基本类型值，会产生 TypeError 错误。</li>
+<li>如果 PreferredType 是 String，步骤 2 跟 3 互换，如果 PreferredType 为空，Date 类型默认为 String，其他都是 Number。</li>
+</ol>
+<h2 id="ToBoolean"><a href="#ToBoolean" class="headerlink" title="ToBoolean"></a>ToBoolean</h2><p>ToBoolean 运算符根据下表将其参数转换为布尔值类型的值：</p>
+<table>
+<thead>
+<tr>
+<th align="left">输入类型</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Undefined</td>
+<td align="left">false</td>
+</tr>
+<tr>
+<td align="left">Null</td>
+<td align="left">false</td>
+</tr>
+<tr>
+<td align="left">Boolean</td>
+<td align="left">结果等于输入的参数（不转换）。</td>
+</tr>
+<tr>
+<td align="left">Number</td>
+<td align="left">如果参数是 +0, -0, 或 NaN，结果为 false ；否则结果为 true。</td>
+</tr>
+<tr>
+<td align="left">String</td>
+<td align="left">如果参数参数是空字符串（其长度为零），结果为 false，否则结果为 true。</td>
+</tr>
+<tr>
+<td align="left">Object</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left">Symbol</td>
+<td align="left">true</td>
+</tr>
+</tbody></table>
+<h2 id="ToNumber"><a href="#ToNumber" class="headerlink" title="ToNumber"></a>ToNumber</h2><p>ToNumber 运算符根据下表将其参数转换为数值类型的值：</p>
+<table>
+<thead>
+<tr>
+<th align="left">输入类型</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Undefined</td>
+<td align="left">NaN</td>
+</tr>
+<tr>
+<td align="left">Null</td>
+<td align="left">+0</td>
+</tr>
+<tr>
+<td align="left">Boolean</td>
+<td align="left">如果参数是 true，结果为 1。如果参数是 false，此结果为 +0。</td>
+</tr>
+<tr>
+<td align="left">Number</td>
+<td align="left">直接返回。</td>
+</tr>
+<tr>
+<td align="left">String</td>
+<td align="left">参见下文的文法和注释。</td>
+</tr>
+<tr>
+<td align="left">Symbol</td>
+<td align="left">TypeError</td>
+</tr>
+<tr>
+<td align="left">Object</td>
+<td align="left">执行下列步骤：<br> 1. 设 primValue 为 ToPrimitive( 输入参数 , hint Number)。<br>2.返回 ToNumber(primValue)。<br></td>
+</tr>
+</tbody></table>
+<h2 id="ToString"><a href="#ToString" class="headerlink" title="ToString"></a>ToString</h2><p>ToString 运算符根据下表将其参数转换为字符串类型的值：</p>
+<table>
+<thead>
+<tr>
+<th align="left">输入类型</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Undefined</td>
+<td align="left">“undefined”</td>
+</tr>
+<tr>
+<td align="left">Null</td>
+<td align="left">“null”</td>
+</tr>
+<tr>
+<td align="left">Boolean</td>
+<td align="left">如果参数是 true，那么结果为 “true”。<br>如果参数是 false，那么结果为 “false”。</td>
+</tr>
+<tr>
+<td align="left">Number</td>
+<td align="left">详见<a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-tostring-applied-to-the-number-type">7.1.12.1NumberToString</a></td>
+</tr>
+<tr>
+<td align="left">String</td>
+<td align="left">直接返回 。</td>
+</tr>
+<tr>
+<td align="left">Symbol</td>
+<td align="left">TypeError</td>
+</tr>
+<tr>
+<td align="left">Object</td>
+<td align="left">执行下列步骤：<br>1、设 primValue 为 ToPrimitive( 输入参数 , hint String)。<br>2、返回 ToString(设 primValue 为 )。</td>
+</tr>
+</tbody></table>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.ecma-international.org/ecma-262/5.1/#sec-9">Type Conversion and Testing</a><br><a target="_blank" rel="noopener" href="https://www.ecma-international.org/ecma-262/#sec-type-conversion">Type Conversion</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-11-18T03:53:34.000Z" title="11/18/2018, 11:53:34 AM">2018-11-18</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Linux/">Linux</a></span><span class="level-item">6 分钟读完 (大约859个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/6560bd3f.html">Linux平均负载</a></h1><div class="content"><h2 id="一、什么是平均负载"><a href="#一、什么是平均负载" class="headerlink" title="一、什么是平均负载"></a>一、什么是平均负载</h2><p><strong>平均负载</strong>（Load Average）是指一段时间内，系统处于可运行状态和不可中断状态的平均进程数，这个一段时间一般取 1 分钟、5 分钟、15 分钟。</p>
+<p><strong>CPU 使用率</strong>是单位时间内 CPU 繁忙情况的统计，跟平均负载并不完全对应，平均负载不仅包括<strong>正在使用 CPU **的进程，还包括</strong>等待 CPU** 和<strong>等待 I/O</strong>的进程，比如：</p>
+<ul>
+<li>CPU 密集型进程，使用大量 CPU 回导致平均负载升高</li>
+<li>I/O 密集型进程，等待 I/O 也会使平均负载升高，但 CPU 使用率不一定高</li>
+<li>大量等待 CPU 的进程调度也会导致平均负载升高，此时 CPU 使用率也会比较高</li>
+</ul>
+<h3 id="如何查看平均负载"><a href="#如何查看平均负载" class="headerlink" title="如何查看平均负载"></a>如何查看平均负载</h3><p>top，uptime，w 等命令都可以查看系统负载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ uptime</span><br><span class="line">12:04  up 8 days,  2:33, 2 users, load averages: 4.14 5.85 5.24</span><br></pre></td></tr></table></figure>
+<h2 id="二、平均负载实际应用"><a href="#二、平均负载实际应用" class="headerlink" title="二、平均负载实际应用"></a>二、平均负载实际应用</h2><h3 id="获取-CPU-核心数"><a href="#获取-CPU-核心数" class="headerlink" title="获取 CPU 核心数"></a>获取 CPU 核心数</h3><p>考虑了 CPU 核心数的影响，才能解释系统负载。可以使用 nproc 或 lscpu 命令查看系统中的处理器单元数量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ nproc</span><br><span class="line">4</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">lscpu</span><br></pre></td></tr></table></figure>
+<p>或者使用 grep 命令查看 /proc/cpuinfo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ grep <span class="string">&#x27;model name&#x27;</span> /proc/cpuinfo | wc -l</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+<h3 id="平均负载多少比较合理"><a href="#平均负载多少比较合理" class="headerlink" title="平均负载多少比较合理"></a>平均负载多少比较合理</h3><p>那么在实际生产环境中，平均负载多少比较合理呢，个人认为：</p>
+<ul>
+<li>平均负载低于 CPU 数量的 70%的时候，系统还是比较空闲的</li>
+<li>平均负载高于 CPU 数量 70%的时候，你就应该分析负载高的原因了</li>
+<li>平均负载高于 CPU 数量的时候意味着有部分进程竞争不到 CPU,将会有性能问题。</li>
+</ul>
+<p>但是 70%并不是绝对的，我们需要分析系统负载趋势，才能更全面的处理问题，结合具体情况具体分析，假设单核情况下：</p>
+<ul>
+<li>1 分钟 Load&gt;5，5 分钟 Load&lt;1，15 分钟 Load&lt;1：短期内繁忙，中长期空闲，初步判断是一个“抖动”或者是“拥塞前兆”</li>
+<li>1 分钟 Load&gt;5，5 分钟 Load&gt;1，15 分钟 Load&lt;1：短期内繁忙，中期内紧张，很可能是一个“拥塞的开始”</li>
+<li>1 分钟 Load&gt;5，5 分钟 Load&gt;5，15 分钟 Load&gt;5：短中长期都繁忙，系统“正在拥塞”</li>
+<li>1 分钟 Load&lt;1，5 分钟 Load&gt;1，15 分钟 Load&gt;5：短期内空闲，中长期繁忙，不用紧张，系统“拥塞正在好转”</li>
+</ul>
+<h2 id="三、如何分析排查平均负载"><a href="#三、如何分析排查平均负载" class="headerlink" title="三、如何分析排查平均负载"></a>三、如何分析排查平均负载</h2><ul>
+<li>运行 uptime 或者 top 命令查看平均负载的变化情况</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ watch -d uptime</span><br><span class="line">14:55:16 up  5:39,  7 users,  load average: 0.15, 0.05, 0.01</span><br></pre></td></tr></table></figure>
+<ul>
+<li>运行 mpstat 查看 CPU 使用率的变化</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -P ALL 表示监控所有 CPU，后面数字 5 表示间隔 5 秒后输出一组数据</span></span><br><span class="line">$ mpstat -P ALL 5</span><br><span class="line">Linux 4.8.0-54-generic (zubin-pc)  2018年11月18日  _x86_64_ (4 CPU)</span><br><span class="line"></span><br><span class="line">14时56分15秒  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle</span><br><span class="line">14时56分20秒  all    0.20    0.00    0.15    0.00    0.00    0.00    0.00    0.00    0.00   99.65</span><br><span class="line">14时56分20秒    0    0.00    0.00    0.00    0.00    0.00    0.20    0.00    0.00    0.00   99.80</span><br><span class="line">14时56分20秒    1    0.20    0.00    0.40    0.00    0.00    0.00    0.00    0.00    0.00   99.40</span><br><span class="line">14时56分20秒    2    0.20    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   99.80</span><br><span class="line">14时56分20秒    3    0.60    0.00    0.40    0.00    0.00    0.00    0.00    0.00    0.00   99.00</span><br></pre></td></tr></table></figure>
+<ul>
+<li>运行 pidstat 查看进程的 CPU、内存、线程、设备 IO 等系统资源的占用情况</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ pidstat -u 5</span><br><span class="line">Linux 4.8.0-54-generic (zubin-pc)  2018年11月18日  _x86_64_ (4 CPU)</span><br><span class="line"></span><br><span class="line">14时57分20秒   UID       PID    %usr %system  %guest    %CPU   CPU  Command</span><br><span class="line">14时57分25秒     0      1118    0.60    0.40    0.00    1.00     2  Xorg</span><br><span class="line">14时57分25秒     0      1499    0.00    0.20    0.00    0.20     1  vmtoolsd</span><br><span class="line">14时57分25秒  1000      1830    0.40    0.20    0.00    0.60     3  compiz</span><br><span class="line">14时57分25秒  1000      2310    0.00    0.40    0.00    0.40     1  /usr/bin/x-term</span><br><span class="line">14时57分25秒  1000      7441    0.20    0.00    0.00    0.20     1  pidstat</span><br><span class="line">14时57分25秒  1000      8169    0.00    0.20    0.00    0.20     0  iostat</span><br><span class="line">14时57分25秒  1000      8901    0.20    0.20    0.00    0.40     3  top</span><br><span class="line">14时57分25秒  1000     10034    0.20    0.20    0.00    0.40     3  pidstat</span><br></pre></td></tr></table></figure></div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/2/">上一页</a></div><div class="pagination-next"><a href="/page/4/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><a class="pagination-link is-current" href="/page/3/">3</a></li><li><a class="pagination-link" href="/page/4/">4</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/7/">7</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Zubin"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Zubin</p><p class="is-size-6 is-block">Later Equals Never</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">64</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">28</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/zubinzhang" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/zubinzhang"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/JavaScript/"><span class="level-start"><span class="level-item">JavaScript</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%85%B6%E4%BB%96/"><span class="level-start"><span class="level-item">其他</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%90%8E%E7%AB%AF/"><span class="level-start"><span class="level-item">后端</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">数据库</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-01-14T09:56:14.000Z">2022-01-14</time></p><p class="title"><a href="/blog/29e2a71f.html">常用的字符编码</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-12-14T11:10:29.000Z">2021-12-14</time></p><p class="title"><a href="/blog/252c89c5.html">关于Rest和RPC</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-28T10:05:06.000Z">2021-11-28</time></p><p class="title"><a href="/blog/7e9f8faa.html">ubuntu下minikube安装</a></p><p class="categories"><a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-30T07:29:09.000Z">2021-06-30</time></p><p class="title"><a href="/blog/9a691d3d.html">TSL握手小记</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-31T06:55:33.000Z">2021-03-31</time></p><p class="title"><a href="/blog/3fda6034.html">API多版本控制</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/06/"><span class="level-start"><span class="level-item">六月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/11/"><span class="level-start"><span class="level-item">十一月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/02/"><span class="level-start"><span class="level-item">二月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/08/"><span class="level-start"><span class="level-item">八月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/06/"><span class="level-start"><span class="level-item">六月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/04/"><span class="level-start"><span class="level-item">四月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/03/"><span class="level-start"><span class="level-item">三月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/02/"><span class="level-start"><span class="level-item">二月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/01/"><span class="level-start"><span class="level-item">一月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/12/"><span class="level-start"><span class="level-item">十二月 2018</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/11/"><span class="level-start"><span class="level-item">十一月 2018</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/10/"><span class="level-start"><span class="level-item">十月 2018</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/09/"><span class="level-start"><span class="level-item">九月 2018</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/08/"><span class="level-start"><span class="level-item">八月 2018</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/07/"><span class="level-start"><span class="level-item">七月 2018</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/06/"><span class="level-start"><span class="level-item">六月 2018</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/05/"><span class="level-start"><span class="level-item">五月 2018</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/04/"><span class="level-start"><span class="level-item">四月 2018</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/03/"><span class="level-start"><span class="level-item">三月 2018</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/API/"><span class="tag">API</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ES6/"><span class="tag">ES6</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Express-js/"><span class="tag">Express.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/KOA/"><span class="tag">KOA</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MongoDB/"><span class="tag">MongoDB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js/"><span class="tag">Node.js</span><span class="tag">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RPC/"><span class="tag">RPC</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React/"><span class="tag">React</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Redis/"><span class="tag">Redis</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Rest/"><span class="tag">Rest</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/git/"><span class="tag">git</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/golang/"><span class="tag">golang</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/kubernetes/"><span class="tag">kubernetes</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vim/"><span class="tag">vim</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/"><span class="tag">作用域</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%8D%E7%AB%AF/"><span class="tag">前端</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%90%8E%E7%AB%AF/"><span class="tag">后端</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/"><span class="tag">字符编码</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="tag">学习笔记</span><span class="tag">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/"><span class="tag">数据库设计</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9E%B6%E6%9E%84/"><span class="tag">架构</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"><span class="tag">版本控制</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="tag">计算机网络</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%B0%E5%BD%95/"><span class="tag">记录</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%97%AD%E5%8C%85/"><span class="tag">闭包</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Zubin</a><p class="is-size-7"><span>&copy; 2022 Zubin</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

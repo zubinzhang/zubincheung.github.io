@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>数据库设计-范式 - Zubin</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Zubin Zhang"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Zubin Zhang"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="范式是符合某一种级别的关系模式的集合。关系型数据库中的关系必须满足一定的要求，满足不同程度要求的为不同范式。目前关系数据库有六种范式：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、Boyce-Codd 范式（BCNF）、第四范式（4NF）和第五范式（5NF）。范式越高，冗余最低，一般到三范式即可，再往上，表越多，可能导致查询效率下降。所以有时为了提高运行效率，可以让数据冗余"><meta property="og:type" content="blog"><meta property="og:title" content="数据库设计-范式"><meta property="og:url" content="https://zubin.site/blog/423b70da.html"><meta property="og:site_name" content="Zubin"><meta property="og:description" content="范式是符合某一种级别的关系模式的集合。关系型数据库中的关系必须满足一定的要求，满足不同程度要求的为不同范式。目前关系数据库有六种范式：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、Boyce-Codd 范式（BCNF）、第四范式（4NF）和第五范式（5NF）。范式越高，冗余最低，一般到三范式即可，再往上，表越多，可能导致查询效率下降。所以有时为了提高运行效率，可以让数据冗余"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://zubin.site/img/og_image.png"><meta property="article:published_time" content="2018-09-01T02:15:58.000Z"><meta property="article:modified_time" content="2020-04-19T14:29:28.000Z"><meta property="article:author" content="Zubin"><meta property="article:tag" content="MySQL"><meta property="article:tag" content="数据库设计"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://zubin.site/blog/423b70da.html"},"headline":"数据库设计-范式","image":["https://zubin.site/img/og_image.png"],"datePublished":"2018-09-01T02:15:58.000Z","dateModified":"2020-04-19T14:29:28.000Z","author":{"@type":"Person","name":"Zubin"},"publisher":{"@type":"Organization","name":"Zubin","logo":{"@type":"ImageObject"}},"description":"范式是符合某一种级别的关系模式的集合。关系型数据库中的关系必须满足一定的要求，满足不同程度要求的为不同范式。目前关系数据库有六种范式：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、Boyce-Codd 范式（BCNF）、第四范式（4NF）和第五范式（5NF）。范式越高，冗余最低，一般到三范式即可，再往上，表越多，可能导致查询效率下降。所以有时为了提高运行效率，可以让数据冗余"}</script><link rel="canonical" href="https://zubin.site/blog/423b70da.html"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Zubin</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-09-01T02:15:58.000Z" title="9/1/2018, 10:15:58 AM">2018-09-01</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">12 分钟读完 (大约1800个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">数据库设计-范式</h1><div class="content"><p>范式是符合某一种级别的关系模式的集合。关系型数据库中的关系必须满足一定的要求，满足不同程度要求的为不同范式。<br>目前关系数据库有六种范式：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、Boyce-Codd 范式（BCNF）、第四范式（4NF）和第五范式（5NF）。<br>范式越高，冗余最低，一般到三范式即可，再往上，表越多，可能导致查询效率下降。所以有时为了提高运行效率，可以让数据冗余</p>
+<a id="more"></a>
+
+<h2 id="一、第一范式（1NF）：确保每列的原子性"><a href="#一、第一范式（1NF）：确保每列的原子性" class="headerlink" title="一、第一范式（1NF）：确保每列的原子性"></a>一、第一范式（1NF）：确保每列的原子性</h2><p>数据表中的每一列（每个字段）必须是不可拆分的最小单元</p>
+<table>
+<thead>
+<tr>
+<th align="left">用户 ID</th>
+<th align="left">姓名</th>
+<th align="left">电话</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">10001</td>
+<td align="left">张三</td>
+<td align="left">0755-88888888 18888888888</td>
+</tr>
+</tbody></table>
+<p>上面的电话字段可以继续分固定电话和手机</p>
+<table>
+<thead>
+<tr>
+<th align="left">用户 ID</th>
+<th align="left">姓名</th>
+<th align="left">固定电话</th>
+<th align="left">手机</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">10001</td>
+<td align="left">张三</td>
+<td align="left">0755-88888888</td>
+<td align="left">18888888888</td>
+</tr>
+</tbody></table>
+<h2 id="二、第二范式-2NF-：非键字段必须依赖于键字段"><a href="#二、第二范式-2NF-：非键字段必须依赖于键字段" class="headerlink" title="二、第二范式(2NF)：非键字段必须依赖于键字段"></a>二、第二范式(2NF)：非键字段必须依赖于键字段</h2><p>如果一个关系满足 1NF，并且除了主键以外的其它列，都依赖于该主键。也就是说在一个数据库表中必须有一个主键，没有包含在主键中的列必须完全依赖于主键，而不能只依赖于主键的一部分。</p>
+<p>比如说要设计一个订单信息表，所以要将订单编号和商品编号作为数据库的联合主键</p>
+<table>
+<thead>
+<tr>
+<th align="left">订单编号</th>
+<th align="left">商品编号</th>
+<th align="left">商品名称</th>
+<th align="left">数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">000001</td>
+<td align="left">p00001</td>
+<td align="left">宝马</td>
+<td align="left">1</td>
+</tr>
+</tbody></table>
+<p>商品名称跟订单编号无关而仅仅跟商品编号有关，这里违反了 2NF 的设计原则，会存在如下问题：</p>
+<ol>
+<li><strong>数据冗余</strong>：<br>一个产品销售了 n 次，“商品名称”就重复 n 次。</li>
+<li><strong>更新异常</strong>：<br>若调整了某商品的名称，数据表中所有行的“商品名称”值都要更新，否则会出现同一个商品名称不同的情况。</li>
+<li><strong>插入异常</strong>：<br>假设要新增新的商品，暂时还没有订单。这样，由于还没有“订单编号”关键字，“商品编号”和“商品名称”也无法记录入数据库。</li>
+<li><strong>删除异常</strong>：<br>假设要一批商品，这些商品信息就应该从数据库表中删除，与此同时，销售信息也被删除了。</li>
+</ol>
+<p>所以上面的表实际上可以拆分为</p>
+<table>
+<thead>
+<tr>
+<th align="left">订单编号</th>
+<th align="left">商品编号</th>
+<th align="left">数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">000001</td>
+<td align="left">p00001</td>
+<td align="left">1</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">商品编号</th>
+<th align="left">商品名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">p00001</td>
+<td align="left">宝马</td>
+</tr>
+</tbody></table>
+<h2 id="三、第三范式-3NF-：确保每列都和主键列直接相关-而不是间接相关"><a href="#三、第三范式-3NF-：确保每列都和主键列直接相关-而不是间接相关" class="headerlink" title="三、第三范式(3NF)：确保每列都和主键列直接相关,而不是间接相关"></a>三、第三范式(3NF)：确保每列都和主键列直接相关,而不是间接相关</h2><p>在第二范式的基础上，数据表中如果不存在非关键字段对任一候选关键字段的传递函数依赖则符合第三范式。<br>满足第三范式的数据库表应该不存在如下依赖关系：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">关键字段 → 非关键字段x → 非关键字段y</span><br></pre></td></tr></table></figure>
+<p>比如设计订单信息表</p>
+<table>
+<thead>
+<tr>
+<th align="left">订单编号</th>
+<th align="left">商品编号</th>
+<th align="left">数量</th>
+<th>业务员 Id</th>
+<th>业务员姓名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">000001</td>
+<td align="left">p00001</td>
+<td align="left">1</td>
+<td>10001</td>
+<td>张三</td>
+</tr>
+</tbody></table>
+<p>明显有 业务员姓名 -&gt; 业务员 Id -&gt; 订单编号 的依赖关系，它也会存在 <strong>数据冗余</strong>、<strong>更新异常</strong>、<strong>插入异常</strong>和 <strong>删除异常</strong> 的情况，上面表可以拆分为：</p>
+<table>
+<thead>
+<tr>
+<th align="left">订单编号</th>
+<th align="left">商品编号</th>
+<th align="left">数量</th>
+<th>业务员 Id</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">000001</td>
+<td align="left">p00001</td>
+<td align="left">1</td>
+<td>10001</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">业务员 Id</th>
+<th align="left">业务员姓名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">10001</td>
+<td align="left">张三</td>
+</tr>
+</tbody></table>
+<p>这样的数据库表是符合第三范式的，消除了 <strong>数据冗余</strong>、<strong>更新异常</strong>、<strong>插入异常</strong>和 <strong>删除异常</strong>。</p>
+<h2 id="四、Boyce-Codd-范式（BCNF）：主属性不依赖于主属性"><a href="#四、Boyce-Codd-范式（BCNF）：主属性不依赖于主属性" class="headerlink" title="四、Boyce-Codd 范式（BCNF）：主属性不依赖于主属性"></a>四、Boyce-Codd 范式（BCNF）：主属性不依赖于主属性</h2><p>在第三范式的基础上，数据库表中如果不存在任何字段对任一候选关键字段的传递函数依赖则符合第三范式。<br>假设仓库管理关系表为：</p>
+<table>
+<thead>
+<tr>
+<th align="left">仓库编号</th>
+<th align="left">商品编号</th>
+<th align="left">管理员编号</th>
+<th>数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">000001</td>
+<td align="left">000001</td>
+<td align="left">10001</td>
+<td>10</td>
+</tr>
+</tbody></table>
+<p>假设一个管理员只在一个仓库工作；一个仓库可以存储多种物品。这个数据库表中存在如下决定关系：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(仓库编号,商品编号) →(管理员编号,数量)</span><br><span class="line">(管理员编号,商品编号) → (仓库编号,数量)</span><br></pre></td></tr></table></figure>
+<p>所以，(仓库编号,商品编号)和(管理员编号,商品编号)都是候选关键字，表中的唯一非关键字段为数量，它是符合第三范式的。但是，由于存在如下决定关系：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(仓库编号) → (管理员编号)</span><br><span class="line">(管理员编号) → (仓库编号)</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>删除异常：<br>当仓库被清空后，所有”商品编号”和”数量”信息被删除的同时，”仓库编号”和”管理员编号”信息也被删除了。</p>
+</li>
+<li><p>插入异常：<br>当仓库没有存储任何物品时，无法给仓库分配管理员。</p>
+</li>
+<li><p>更新异常：<br>如果仓库换了管理员，则表中所有行的管理员编号 都要修改。</p>
+</li>
+</ol>
+<p>把仓库管理关系表分解为二个关系表：</p>
+<table>
+<thead>
+<tr>
+<th align="left">仓库编号</th>
+<th align="left">商品编号</th>
+<th align="left">数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">000001</td>
+<td align="left">000001</td>
+<td align="left">10</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">仓库编号</th>
+<th align="left">管理员编号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">10001</td>
+<td align="left">10001</td>
+</tr>
+</tbody></table>
+<p>这样的数据库表是符合 BCNF 范式的，消除了删除异常、插入异常和更新异常。</p>
+<p>还可以这么说：<strong>若一个关系达到了第三范式，并且它只有一个候选码，或者它的每个候选码都是单属性，则该关系自然达到 BCNF</strong>。</p>
+<h2 id="五、-第四范式-4NF-：要求把同一表内的多对多关系删除。"><a href="#五、-第四范式-4NF-：要求把同一表内的多对多关系删除。" class="headerlink" title="五、 第四范式(4NF)：要求把同一表内的多对多关系删除。"></a>五、 第四范式(4NF)：要求把同一表内的多对多关系删除。</h2><p>当一个表中的非主属性互相独立时（3NF），这些非主属性不应该有多值。若有多值就违反了第四范式。</p>
+<p>下面用户表符合 3NF ，但在某些情况下，比如说有两个手机号码时，这样的表还是不合理的，违反了 4NF。</p>
+<table>
+<thead>
+<tr>
+<th align="left">用户 ID</th>
+<th align="left">姓名</th>
+<th align="left">固定电话</th>
+<th align="left">手机</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">10001</td>
+<td align="left">张三</td>
+<td align="left">0755-88888888</td>
+<td align="left">18888888888</td>
+</tr>
+<tr>
+<td align="left">10001</td>
+<td align="left">张三</td>
+<td align="left">0755-88888888</td>
+<td align="left">18888888889</td>
+</tr>
+</tbody></table>
+<p>就可以拆分为固定电话表(用户 ID，固定电话)和手机号码表(用户 ID，手机号码)</p>
+<p>所以只有在某些特殊情况下，要考虑将表规范到第四范式。</p>
+<h2 id="六、-第五范式-5NF-：最终范式。"><a href="#六、-第五范式-5NF-：最终范式。" class="headerlink" title="六、 第五范式(5NF)：最终范式。"></a>六、 第五范式(5NF)：最终范式。</h2><p>满足第四范式条件下，表必须可以分解为较小的表，除非那些表在逻辑上拥有与原始表相同的主键。<br>比如一个销售信息表（销售人员，供应商，产品）。<br>在某些情况下，这个表中会产生一些冗余。可以将表分解为：</p>
+<ul>
+<li>销售人员供应商表（销售人员，供应商）；</li>
+<li>销售人员产品表（销售人员，产品）；</li>
+<li>供应商产品表（供应商，产品）</li>
+</ul>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MySQL/">MySQL</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/">数据库设计</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/blog/adc3b0ca.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">数据库设计-约束</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/blog/613c929d.html"><span class="level-item">git操作失败小结</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Zubin"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Zubin</p><p class="is-size-6 is-block">Later Equals Never</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">64</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">28</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/zubinzhang" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/zubinzhang"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/JavaScript/"><span class="level-start"><span class="level-item">JavaScript</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%85%B6%E4%BB%96/"><span class="level-start"><span class="level-item">其他</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%90%8E%E7%AB%AF/"><span class="level-start"><span class="level-item">后端</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">数据库</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-01-14T09:56:14.000Z">2022-01-14</time></p><p class="title"><a href="/blog/29e2a71f.html">常用的字符编码</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-12-14T11:10:29.000Z">2021-12-14</time></p><p class="title"><a href="/blog/252c89c5.html">关于Rest和RPC</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-28T10:05:06.000Z">2021-11-28</time></p><p class="title"><a href="/blog/7e9f8faa.html">ubuntu下minikube安装</a></p><p class="categories"><a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-30T07:29:09.000Z">2021-06-30</time></p><p class="title"><a href="/blog/9a691d3d.html">TSL握手小记</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-31T06:55:33.000Z">2021-03-31</time></p><p class="title"><a href="/blog/3fda6034.html">API多版本控制</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/06/"><span class="level-start"><span class="level-item">六月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/11/"><span class="level-start"><span class="level-item">十一月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/02/"><span class="level-start"><span class="level-item">二月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/08/"><span class="level-start"><span class="level-item">八月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/06/"><span class="level-start"><span class="level-item">六月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/04/"><span class="level-start"><span class="level-item">四月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/03/"><span class="level-start"><span class="level-item">三月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/02/"><span class="level-start"><span class="level-item">二月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/01/"><span class="level-start"><span class="level-item">一月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/12/"><span class="level-start"><span class="level-item">十二月 2018</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/11/"><span class="level-start"><span class="level-item">十一月 2018</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/10/"><span class="level-start"><span class="level-item">十月 2018</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/09/"><span class="level-start"><span class="level-item">九月 2018</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/08/"><span class="level-start"><span class="level-item">八月 2018</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/07/"><span class="level-start"><span class="level-item">七月 2018</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/06/"><span class="level-start"><span class="level-item">六月 2018</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/05/"><span class="level-start"><span class="level-item">五月 2018</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/04/"><span class="level-start"><span class="level-item">四月 2018</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/03/"><span class="level-start"><span class="level-item">三月 2018</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/API/"><span class="tag">API</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ES6/"><span class="tag">ES6</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Express-js/"><span class="tag">Express.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/KOA/"><span class="tag">KOA</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MongoDB/"><span class="tag">MongoDB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js/"><span class="tag">Node.js</span><span class="tag">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RPC/"><span class="tag">RPC</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React/"><span class="tag">React</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Redis/"><span class="tag">Redis</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Rest/"><span class="tag">Rest</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/git/"><span class="tag">git</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/golang/"><span class="tag">golang</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/kubernetes/"><span class="tag">kubernetes</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vim/"><span class="tag">vim</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/"><span class="tag">作用域</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%8D%E7%AB%AF/"><span class="tag">前端</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%90%8E%E7%AB%AF/"><span class="tag">后端</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/"><span class="tag">字符编码</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="tag">学习笔记</span><span class="tag">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/"><span class="tag">数据库设计</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9E%B6%E6%9E%84/"><span class="tag">架构</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"><span class="tag">版本控制</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="tag">计算机网络</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%B0%E5%BD%95/"><span class="tag">记录</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%97%AD%E5%8C%85/"><span class="tag">闭包</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Zubin</a><p class="is-size-7"><span>&copy; 2022 Zubin</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
