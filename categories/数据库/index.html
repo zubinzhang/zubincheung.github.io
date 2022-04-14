@@ -1,565 +1,197 @@
-<!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>分类: 数据库 - Zubin</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Zubin Zhang"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Zubin Zhang"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="Zubin"><meta property="og:url" content="https://zubin.site/"><meta property="og:site_name" content="Zubin"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://zubin.site/img/og_image.png"><meta property="article:author" content="Zubin"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://zubin.site"},"headline":"Zubin","image":["https://zubin.site/img/og_image.png"],"author":{"@type":"Person","name":"Zubin"},"publisher":{"@type":"Organization","name":"Zubin","logo":{"@type":"ImageObject"}},"description":null}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.1"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Zubin</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">分类</a></li><li class="is-active"><a href="#" aria-current="page">数据库</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-11-02T09:17:43.000Z" title="11/2/2020, 5:17:43 PM">2020-11-02</time>发表</span><span class="level-item"><time dateTime="2020-11-02T09:17:43.000Z" title="11/2/2020, 5:17:43 PM">2020-11-02</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">5 分钟读完 (大约686个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/89fba6c2.html">MySQL临时表</a></h1><div class="content"><p>MySQL 临时表分为“内存临时表”和“磁盘临时表”，其中内存临时表使用 MySQL 的 MEMORY 存储引擎，磁盘临时表使用 MySQL 的 MyISAM 存储引擎；一般情况下，MySQL 会先创建内存临时表，但内存临时表超过配置指定的值后，MySQL 会将内存临时表导出到磁盘临时表。<br>MySQL 临时表在我们需要保存一些临时数据时是非常有用的。临时表只在当前连接可见，当关闭连接时，Mysql 会自动删除表并释放所有空间。</p></div><a class="article-more button is-small is-size-7" href="/blog/89fba6c2.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-07-10T07:05:06.000Z" title="7/10/2020, 3:05:06 PM">2020-07-10</time>发表</span><span class="level-item"><time dateTime="2020-07-10T07:05:06.000Z" title="7/10/2020, 3:05:06 PM">2020-07-10</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">5 分钟读完 (大约766个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/2669ab64.html">redis cluster的批量操作</a></h1><div class="content"><p>之前项目中都在使用redis的单机或者主从，后来迁移到<strong>集群</strong>的时候，出现了一系列问题，下面整理一下redis集群方面的知识。</p></div><a class="article-more button is-small is-size-7" href="/blog/2669ab64.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-05-17T03:10:08.000Z" title="5/17/2020, 11:10:08 AM">2020-05-17</time>发表</span><span class="level-item"><time dateTime="2020-05-17T03:10:08.000Z" title="5/17/2020, 11:10:08 AM">2020-05-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">6 分钟读完 (大约925个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/cd3a8f32.html">redis的过期策略和内存淘汰</a></h1><div class="content"><p>之前经常将将 Redis 的过期策略和内存淘汰策略搞混淆，查阅了一些资料后做个总结。</p></div><a class="article-more button is-small is-size-7" href="/blog/cd3a8f32.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-02-27T03:54:29.000Z" title="2/27/2020, 11:54:29 AM">2020-02-27</time>发表</span><span class="level-item"><time dateTime="2022-01-29T03:53:40.862Z" title="1/29/2022, 11:53:40 AM">2022-01-29</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">8 分钟读完 (大约1235个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/36ce36ae.html">MongoDB索引笔记</a></h1><div class="content"><p>在 MongoDB 查询过程中，<strong>索引</strong>(Index) 起到非常重要的作用，如果没有索引，MongoDB将会执行<strong>全表扫描</strong> 。当然如果数据量比较少全表扫描的开销并不大，但如果集合文档数量到百万、千万甚至上亿的时候，一个查询耗费数十秒甚至几分钟都有可能,代价非常高昂。</p></div><a class="article-more button is-small is-size-7" href="/blog/36ce36ae.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-03-15T07:29:09.000Z" title="3/15/2019, 3:29:09 PM">2019-03-15</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">4 分钟读完 (大约611个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/6fedc606.html">记一次MySQL大表空间收缩</a></h1><div class="content"><p>最近收到 MySQL 数据库磁盘空间使用率过高的报警，发现其中的一个表空间占用竟然高达三百多 G。删除了一半多的数据后，可是表文件大小还是没变，当时就懵了。<br>请教 DBA 才知道删除大量数据后存在数据空洞，MySQL 不会自动收缩表空间，需要手工操作。</p>
-<h3 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h3><ol>
-<li><p>InnoDB 里的数据都是用 B+树的结构组织的，每当删除了一条记录后，InnoDB 引擎只会把这个记录标记为删除，而在一段时间内的大量删除操作，会使这种留空的空间变得比存储列表内容所使用的空间更大。</p>
-</li>
-<li><p>记录的复用只限定符合范围条件的数据。比如说删除一条 ID 为 400 的数据，当执行插入操作 ID 为 400 前后的数据时，MySQL 可能会复用这个位置。但如果某个空白空间一直没有被大小合适的数据占用，仍然无法将其彻底占用，就形成了碎片。</p>
-</li>
-<li><p>如果是随机插入数据也会造成数据空洞。</p>
-</li>
-</ol>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ol>
-<li>对数据导出后进行收缩，然后导入数据。</li>
-<li>重建表</li>
-</ol>
-<p>目前没有导出数据的条件，采用<strong>重建表</strong>的方法，可以采用<code>alter table A engine=InnoDB</code> 命令。<br>MySQL 5.6 版本开始引入了 <strong>Online DDL</strong>，允许在表上执行 DDL 的操作（比如创建索引）的同时不阻塞并发的 DML 操作 和 查询（select）操作。</p>
-<ul>
-<li><p>Algorithm&#x3D;Inplace ：为了避免表拷贝导致的实例性能问题（空间、I&#x2F;O 问题），建议在 DDL 中包含该选项。如果 DDL 操作不支持 Algorithm&#x3D;Inplace 方式，DDL 操作会立刻返回错误。</p>
-</li>
-<li><p>Lock&#x3D;None ：为了在 DDL 操作过程中不影响业务的 DML 操作，建议在 DDL 中包含该选项。如果 DDL 操作不支持 Lock&#x3D;None （允许并行 DML 操作）选项，DDL 操作会立刻返回错误。</p>
-</li>
-</ul>
-<p>所有的 DDL 操作均建议在<strong>业务低峰期</strong>进行，避免对业务产生影响。经过测试，删除表的数据后，对应的磁盘空间也正常释放了。</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-01-13T02:37:13.000Z" title="1/13/2019, 10:37:13 AM">2019-01-13</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">9 分钟读完 (大约1275个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/6dd28e9b.html">MySQL索引优化</a></h1><div class="content"><h3 id="不使用索引的情况"><a href="#不使用索引的情况" class="headerlink" title="不使用索引的情况"></a>不使用索引的情况</h3><ol>
-<li>如果 mysql 估计使用索引比全表扫描更慢，则不使用索引。<br>例如：如果 key_part 1 均匀分布在 1 和 100 之间，下列查询中使用索引就不是很好：</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">where</span> key_part1 <span class="operator">&gt;</span> <span class="number">1</span> <span class="keyword">and</span> key_part1 <span class="operator">&lt;</span> <span class="number">90</span>;</span><br></pre></td></tr></table></figure>
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>数据库 | Zubin | Later Equals Never</title>
 
-<ol start="2">
-<li><p>如果使用 heap 表并且 where 条件中不用＝索引列，其他 &gt; 、 &lt; 、 &gt;&#x3D; 、 &lt;&#x3D; 均不使 用索引（MyISAM 和 innodb 表使用索引）；</p>
-</li>
-<li><p>使用 or 分割的条件，如果 or 前的条件中的列有索引，后面的列中没有索引，那么涉及到的索引都不会使用。</p>
-</li>
-<li><p>如果创建复合索引，如果条件中使用的列不是索引列的第一部分；（不是前缀索引）</p>
-</li>
-<li><p>如果 like 是以％开始；</p>
-</li>
-<li><p>对 where 后边条件为字符串的一定要加引号，字符串如果为数字 mysql 会自动转 为字符串，但是不使用索引。</p>
-</li>
-</ol>
-<h3 id="查看索引使用情况"><a href="#查看索引使用情况" class="headerlink" title="查看索引使用情况"></a>查看索引使用情况</h3><p>如果索引正在工作， Handler_read_key 的值将很高，这个值代表了一个行被索引值读的次数，很低的值表明增加索引得到的性能改善不高，因为索引并不经常使 用。</p>
-<p>Handler_read_rnd_next 的值高则意味着查询运行低效，并且应该建立索引补救。这个值的含义是在数据文件中读下一行的请求数。如果你正进行大量的表扫描，</p>
-<p>该值较高。通常说明表索引不正确或写入的查询没有利用索引。</p>
-<p>语法：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> status <span class="keyword">like</span> <span class="string">&#x27;Handler_read%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+  
+  <meta name="author" content="Zubin">
+  
 
-<h3 id="具体优化查询语句"><a href="#具体优化查询语句" class="headerlink" title="具体优化查询语句"></a>具体优化查询语句</h3><ol>
-<li>应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，建议使用默认值</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num <span class="keyword">is</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"># 可以在 num 上设置默认值 <span class="number">0</span>，确保表中 num 列没有 <span class="keyword">null</span> 值</span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+  
 
-<ol start="2">
-<li>应尽量避免在 where 子句中使用!&#x3D;或&lt;&gt;操作符</li>
-</ol>
-<p>MySQL 只有对以下操作符才使用索引：&lt;，&lt;&#x3D;，&#x3D;，&gt;，&gt;&#x3D;，BETWEEN，IN，以及某些时候的 LIKE。</p>
-<p>可以在 LIKE 操作中使用索引的情形是指另一个操作数不是以通配符（%或者_）开头的情形。例如:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> col <span class="keyword">LIKE</span> <span class="string">&#x27;Mich%&#x27;</span>; # 这个查询将使用索引，</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> id <span class="keyword">FROM</span> t <span class="keyword">WHERE</span> col <span class="keyword">LIKE</span> <span class="string">&#x27;%ike&#x27;</span>; #这个查询不会使用索引。</span><br></pre></td></tr></table></figure>
+  
 
-<ol start="3">
-<li>应尽量避免在 where 子句中使用 or 来连接条件,所有的 or 条件都必须是独立索引</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">10</span> <span class="keyword">or</span> num<span class="operator">=</span><span class="number">20</span>;</span><br><span class="line"># 可以使用 <span class="keyword">UNION</span> 合并查询：</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">10</span> <span class="keyword">union</span> <span class="keyword">all</span> <span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-<ol start="4">
-<li>in 和 not in 也要慎用</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num <span class="keyword">in</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line">对于连续的数值，能用 <span class="keyword">between</span> 就不要用 <span class="keyword">in</span> 了：</span><br><span class="line"></span><br><span class="line"><span class="keyword">Select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num <span class="keyword">between</span> <span class="number">1</span> <span class="keyword">and</span> <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+  
 
-<ol start="6">
-<li>如果在 where 子句中使用参数，也会导致全表扫描。</li>
-</ol>
-<p>因为 SQL 只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推 迟到运行时；它必须在编译时进行选择。然而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="variable">@num</span>;</span><br><span class="line"># 可以改为强制查询使用索引</span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">with</span>(index(索引名)) <span class="keyword">where</span> num<span class="operator">=</span><span class="variable">@num</span>;</span><br></pre></td></tr></table></figure>
+  <meta property="og:site_name" content="Zubin"/>
 
-<ol start="7">
-<li>应尽量避免在 where 子句中对字段进行表达式操作</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">/</span><span class="number">2</span><span class="operator">=</span><span class="number">100</span>;</span><br><span class="line"># 应改为:</span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> num<span class="operator">=</span><span class="number">100</span>\<span class="operator">*</span><span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
 
-<ol start="8">
-<li>应尽量避免在 where 子句中对字段进行函数操作</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> <span class="built_in">substring</span>(name,<span class="number">1</span>,<span class="number">3</span>)<span class="operator">=</span><span class="string">&#x27;abc&#x27;</span>; <span class="comment">--name</span></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> datediff(<span class="keyword">day</span>,createdate,<span class="string">&#x27;2005-11-30&#x27;</span>)<span class="operator">=</span><span class="number">0</span>; <span class="comment">--‘2005-11-30’</span></span><br><span class="line">#  应改为:</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> name <span class="keyword">like</span> <span class="string">&#x27;abc%&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> id <span class="keyword">from</span> t <span class="keyword">where</span> createdate<span class="operator">&gt;=</span><span class="string">&#x27;2005-11-30&#x27;</span> <span class="keyword">and</span> createdate<span class="operator">&lt;</span><span class="string">&#x27;2005-12-1&#x27;</span>;</span><br></pre></td></tr></table></figure>
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Zubin" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.4.2"></head>
 
-<ol start="9">
-<li>很多时候用 exists 代替 in 是一个好的选择：</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> num <span class="keyword">from</span> a <span class="keyword">where</span> num <span class="keyword">in</span>(<span class="keyword">select</span> num <span class="keyword">from</span> b);</span><br><span class="line">用下面的语句替换：</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> num <span class="keyword">from</span> a <span class="keyword">where</span> <span class="keyword">exists</span>(<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">from</span> b <span class="keyword">where</span> num<span class="operator">=</span>a.num);</span><br></pre></td></tr></table></figure>
 
-<ol start="10">
-<li>并不是所有索引对查询都有效，</li>
-</ol>
-<p>SQL 是根据表中数据来进行查询优化的，当索引列有大量数据重复时，SQL 查询可能不会去利用索引，如一表中有字段 sex，male、female 几乎各一半，那么即使在 sex 上建了索引也对查询效率起不了作用。</p>
-<ol start="11">
-<li>索引并不是越多越好，</li>
-</ol>
-<p>索引固然可以提高相应的 select 的效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时有可能会重建索引，所以怎样建索引需要慎重考虑，视具体情况而定。一个表的索引数最好不要超过 6 个，若太多则应考虑一些不常使用到的列上建的索引是否有必要。</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-01-05T02:13:33.000Z" title="1/5/2019, 10:13:33 AM">2019-01-05</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">6 分钟读完 (大约948个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/43a71ae4.html">MySQL索引小结</a></h1><div class="content"><h3 id="索引的作用"><a href="#索引的作用" class="headerlink" title="索引的作用"></a>索引的作用</h3><p>索引的出现其实就是为了提高数据查询的效率，用于快速找出在某个列中有一特定值的行。</p>
-<h3 id="索引的常见模型"><a href="#索引的常见模型" class="headerlink" title="索引的常见模型"></a>索引的常见模型</h3><p>实现索引的方式却有很多种,常见的索引模型有<strong>哈希表</strong>、<strong>有序数组</strong>、<strong>搜索树</strong></p>
-<ul>
-<li>哈希表：键 - 值(key - value)<ul>
-<li>哈希的思路：把值放在数组里，用一个哈希函数把 key 换算成一个确定的位置，然后把 value 放在数组的这个位置</li>
-<li>哈希冲突的处理办法：链表</li>
-<li>适用场景：只有等值查询的场景</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>有序数组：按顺序存储。<ul>
-<li>查询用二分法就可以快速查询，时间复杂度是：O(log(N))</li>
-<li>优点：在等值查询和范围查询场景中的性能就都非常优秀</li>
-<li>缺点：往中间插入一个记录就必须得挪动后面所有的记录，更新效率低</li>
-<li>适用场景：静态存储引擎。</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>二叉搜索树<ul>
-<li>特点：每个节点的左儿子小于父节点，父节点又小于右儿子</li>
-<li>查询时间复杂度： O(log(N))</li>
-<li>更新时间复杂度： O(log(N))</li>
-<li>适用场景：数据库存储大多不适用二叉树，因为树高过高，会适用 N 叉树</li>
-</ul>
-</li>
-</ul>
-<h3 id="InnoDB-中的索引模型"><a href="#InnoDB-中的索引模型" class="headerlink" title="InnoDB 中的索引模型"></a>InnoDB 中的索引模型</h3><p>在 InnoDB 中，表都是根据主键顺序以索引的形式存放的，这种存储方式的表称为索引组织表。InnoDB 使用了 B+ 树索引模型，所以数据都是存储在 B+ 树中的。</p>
-<h3 id="索引类型：主键索引、非主键索引"><a href="#索引类型：主键索引、非主键索引" class="headerlink" title="索引类型：主键索引、非主键索引"></a>索引类型：主键索引、非主键索引</h3><ul>
-<li>主键索引的叶子节点存的是整行的数据(聚簇索引)</li>
-<li>非主键索引的叶子节点内容是主键的值(二级索引)</li>
-<li>区别：主键索引只要搜索 ID 这个 B+Tree 即可拿到数据。普通索引先搜索索引拿到主键值，再到主键索引树搜索一次(<strong>回表</strong>)</li>
-</ul>
-<h3 id="索引维护"><a href="#索引维护" class="headerlink" title="索引维护"></a>索引维护</h3><ul>
-<li>一个数据页满了，按照 B+Tree 算法，新增加一个数据页，叫做<strong>页分裂</strong>，会导致性能下降。空间利用率降低大概 50%。</li>
-<li>当相邻的两个数据页利用率很低的时候会做<strong>数据页合并</strong>，合并的过程是分裂过程的<strong>逆</strong>过程。</li>
-<li>从性能和存储空间方面考量，<strong>自增主键</strong>往往是更合理的选择。</li>
-</ul>
-<h3 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><p>回到主键索引树搜索的过程，我们称为<strong>回表</strong></p>
-<p>如果查询条件使用的是普通索引（或是联合索引的最左原则字段），查询结果是联合索引的字段或是主键，不用回表操作，直接返回结果，减少 IO 磁盘读写读取正行数据</p>
-<h3 id="最左前缀"><a href="#最左前缀" class="headerlink" title="最左前缀"></a>最左前缀</h3><p><strong>联合索引</strong>的最左 N 个字段，也可以是<strong>字符串索引</strong>的最左 M 个字符</p>
-<h3 id="联合索引"><a href="#联合索引" class="headerlink" title="联合索引"></a>联合索引</h3><p>根据创建联合索引的顺序，以最<strong>左</strong>原则进行 where 检索，比如（age，name）以 age&#x3D;1 或 age&#x3D; 1 and name&#x3D;‘张三’可以使用索引，单以 name&#x3D;‘张三’ 不会使用索引，考虑到存储空间的问题，还请根据业务需求，将查找频繁的数据进行靠左创建索引。</p>
-<h3 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a>索引下推</h3><p><code>like &#39;hello%’and age &gt;10</code> 检索，MySQL5.6 版本之前，会对匹配的数据进行回表查询。5.6 版本后，会先过滤掉 age&lt;10 的数据，再进行回表查询，减少回表率，提升检索速度</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-09-20T11:41:35.000Z" title="9/20/2018, 7:41:35 PM">2018-09-20</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">4 分钟读完 (大约554个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/46c25054.html">MongoDB-aggregate用法</a></h1><div class="content"><p>MongoDB 中聚合(aggregate)方法可以对集合中的文档进行变换和组合，主要用于处理数据。语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.aggregate(pipeline, options);</span><br></pre></td></tr></table></figure>
+<body>
+<div class="blog">
+  <div class="content">
 
-<h3 id="管道操作符"><a href="#管道操作符" class="headerlink" title="管道操作符"></a>管道操作符</h3><p>MongoDB 的聚合管道将 MongoDB 文档在一个管道处理完毕后将结果传递给下一个管道处理，管道操纵是可以重复的。</p>
-<p>管道聚合阶段:</p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="keyword">$project</span>：包含、排除、重命名和显示字段</span></span><br><span class="line"><span class="meta"><span class="keyword">$match</span>：查询，需要同find()一样的参数</span></span><br><span class="line"><span class="meta"><span class="keyword">$limit</span>：限制结果数量</span></span><br><span class="line"><span class="meta"><span class="keyword">$skip</span>：忽略结果的数量</span></span><br><span class="line"><span class="meta"><span class="keyword">$sort</span>：按照给定的字段排序结果</span></span><br><span class="line"><span class="meta"><span class="keyword">$group</span>：按照给定表达式组合结果</span></span><br><span class="line"><span class="meta"><span class="keyword">$unwind</span>：分割嵌入数组到自己顶层文件&lt;br&gt;</span></span><br></pre></td></tr></table></figure>
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Zubin</a>
+    </h1>
+    <p class="site-description">Later Equals Never</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+    </ul>
+  </nav>
+</header>
 
-<p>group 查询操作符：</p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="keyword">$sum</span> 总结从集合中的所有文件所定义的值.</span></span><br><span class="line"><span class="meta"><span class="keyword">$avg</span> 从所有文档集合中所有给定值计算的平均.</span></span><br><span class="line"><span class="meta"><span class="keyword">$min</span> 获取集合中的所有文件中的相应值最小.</span></span><br><span class="line"><span class="meta"><span class="keyword">$max</span> 获取集合中的所有文件中的相应值的最大.</span></span><br><span class="line"><span class="meta"><span class="keyword">$push</span> 值插入到一个数组生成文档中.</span></span><br><span class="line"><span class="meta"><span class="keyword">$addToSet</span> 值插入到一个数组中所得到的文档，但不会创建重复.</span></span><br><span class="line"><span class="meta"><span class="keyword">$first</span> 根据分组从源文档中获取的第一个文档。通常情况下，这才有意义，连同以前的一些应用 “$sort”-stage.</span></span><br><span class="line"><span class="meta"><span class="keyword">$last</span> 根据分组从源文档中获取最后的文档。通常，这才有意义，连同以前的一些应用 “$sort”-stage.</span></span><br></pre></td></tr></table></figure>
+    <main class="site-main posts-loop">
+    
 
-<h3 id="附加选项"><a href="#附加选项" class="headerlink" title="附加选项"></a>附加选项</h3><ul>
-<li>explain：布尔值，指定返回结果是否显示该操作的执行计划</li>
-<li>allowDiskUse：布尔值，指定该聚合操作是否使用磁盘。<br>每个阶段管道限制为 100MB 的内存。如果一个节点管道超过这个极限,MongoDB 将产生一个错误。为了能够在处理大型数据集,可以设置 allowDiskUse 为 true 来在聚合管道节点把数据写入临时文件。这样就可以解决 100MB 的内存的限制。</li>
-<li>cursor</li>
-<li>maxTimeMS</li>
-<li>bypassDocumentValidation</li>
-<li>readConcern</li>
-<li>collation</li>
-</ul>
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a target="_blank" rel="noopener" href="https://docs.mongodb.com/manual/reference/method/db.collection.aggregate/#db.collection.aggregate">https://docs.mongodb.com/manual/reference/method/db.collection.aggregate/#db.collection.aggregate</a><br><a target="_blank" rel="noopener" href="http://www.mongodb.org.cn/tutorial/19.html">http://www.mongodb.org.cn/tutorial/19.html</a></p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-09-14T11:18:44.000Z" title="9/14/2018, 7:18:44 PM">2018-09-14</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">10 分钟读完 (大约1523个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/553331a9.html">Redis基础数据类型</a></h1><div class="content"><p>Redis 有 5 种基础数据结构，分别为：<strong>String</strong> (字符串)、<strong>Hash</strong> (哈希)、<strong>List</strong> (列表)、<strong>Set</strong> (集合) 和 <strong>Sorted Set</strong> (有序集合)</p>
-<h3 id="String-字符串"><a href="#String-字符串" class="headerlink" title="String (字符串)"></a>String (字符串)</h3><p>String 数据结构是简单的 key-value 类型。<br>最常见的用途就是缓存信息。我们可以将需要缓存结构体使用 JSON 序列化成字符串来缓存，取出来的时候再反序列化一下。</p>
-<table>
-<thead>
-<tr>
-<th align="left">常用命令</th>
-<th align="left">说明</th>
-<th align="left">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">set</td>
-<td align="left">设置指定 key 的值</td>
-<td align="left">set name zubin</td>
-</tr>
-<tr>
-<td align="left">get</td>
-<td align="left">获取指定 key 的值</td>
-<td align="left">get name</td>
-</tr>
-<tr>
-<td align="left">del</td>
-<td align="left">删除指定 key</td>
-<td align="left">del key</td>
-</tr>
-<tr>
-<td align="left">mset</td>
-<td align="left">批量设置指定 key 的值</td>
-<td align="left">mset name zubin age 18</td>
-</tr>
-<tr>
-<td align="left">mget</td>
-<td align="left">批量获取指定 key 的值</td>
-<td align="left">mget name age</td>
-</tr>
-<tr>
-<td align="left">setex</td>
-<td align="left">如果设置指定 key 的值和过期时间(秒)</td>
-<td align="left">setex name 5 zubin</td>
-</tr>
-<tr>
-<td align="left">setnx</td>
-<td align="left">只有 key 不存在时设置 key 的值</td>
-<td align="left">setnx name zubin</td>
-</tr>
-<tr>
-<td align="left">incr</td>
-<td align="left">将 key 中存储的数字值增 1</td>
-<td align="left">incr age</td>
-</tr>
-<tr>
-<td align="left">incyby</td>
-<td align="left">将 key 所储存的值加上给定的增量值</td>
-<td align="left">incrby age 5</td>
-</tr>
-<tr>
-<td align="left">decr</td>
-<td align="left">将 key 中存储的数字值减 1</td>
-<td align="left">decr age</td>
-</tr>
-<tr>
-<td align="left">strlen</td>
-<td align="left">返回指定 key 中 value 的长度</td>
-<td align="left">strlen name</td>
-</tr>
-<tr>
-<td align="left">append</td>
-<td align="left">将字符串追加到指定 key 中值的末尾。</td>
-<td align="left">append name 1</td>
-</tr>
-</tbody></table>
-<h3 id="Hash-哈希"><a href="#Hash-哈希" class="headerlink" title="Hash (哈希)"></a>Hash (哈希)</h3><p>Redis hash 是一个 string 类型的 field 和 value 的映射表，是无序字典, 特别适合用于存储对象。每个 hash 可以存储<code>2^32 - 1</code>（4294967295） 键值对。</p>
-<table>
-<thead>
-<tr>
-<th align="left">常用命令</th>
-<th align="left">说明</th>
-<th align="left">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">hset</td>
-<td align="left">设置 hash 表中 field 的值</td>
-<td align="left">hset user name zubin</td>
-</tr>
-<tr>
-<td align="left">hmset</td>
-<td align="left">设置 hash 表中多个 field 的值</td>
-<td align="left">hmset user name zubin age 18</td>
-</tr>
-<tr>
-<td align="left">hsetnx</td>
-<td align="left">field 不存在时设置哈希表字段的值</td>
-<td align="left">hsetnx user name zubin</td>
-</tr>
-<tr>
-<td align="left">hget</td>
-<td align="left">获取指定字段的值</td>
-<td align="left">hget user name</td>
-</tr>
-<tr>
-<td align="left">hmget</td>
-<td align="left">获取多个字段的值</td>
-<td align="left">hmget user age name</td>
-</tr>
-<tr>
-<td align="left">hgetall</td>
-<td align="left">获取 hash 表中所有字段的值</td>
-<td align="left">hgetall user</td>
-</tr>
-<tr>
-<td align="left">hdel</td>
-<td align="left">删除一个或多个 hash 字段</td>
-<td align="left">hdel user age</td>
-</tr>
-<tr>
-<td align="left">hexists</td>
-<td align="left">判断 hash 表中指定的字段是否存在</td>
-<td align="left">hexists user age</td>
-</tr>
-<tr>
-<td align="left">hincrby</td>
-<td align="left">为 hash 表中指定的整数值字段加上增量</td>
-<td align="left">hincrby user age 5</td>
-</tr>
-<tr>
-<td align="left">hkeys</td>
-<td align="left">获取 hash 表中所有的字段</td>
-<td align="left">hkeys user</td>
-</tr>
-<tr>
-<td align="left">hvals</td>
-<td align="left">获取 hash 表中所有的值</td>
-<td align="left">hvals user</td>
-</tr>
-<tr>
-<td align="left">hlen</td>
-<td align="left">获取 hash 表中字段的数量</td>
-<td align="left">hlen user</td>
-</tr>
-</tbody></table>
-<h3 id="List-列表"><a href="#List-列表" class="headerlink" title="List (列表)"></a>List (列表)</h3><p>Redis 列表是简单的字符串列表，按照插入顺序排序，注意它是<strong>链表</strong>而不是数组，一个列表最多可以包含 <code>2^32 - 1</code> 个元素 (4294967295, 每个列表超过 40 亿个元素)。<br>list 的插入和删除操作非常快，时间复杂度为 O(1)，但是索引定位很慢，时间复杂度为 O(n)。<br>list 常用来做异步队列使用，你可以添加一个元素到列表的头部（左边）或者尾部（右边）。</p>
-<table>
-<thead>
-<tr>
-<th align="left">常用命令</th>
-<th align="left">说明</th>
-<th align="left">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">lpush</td>
-<td align="left">将一个或多个值插入到列表头部</td>
-<td align="left">lpush skills Node Golang Java</td>
-</tr>
-<tr>
-<td align="left">lpushx</td>
-<td align="left">将一个或多个值插入到已存在的列表头部</td>
-<td align="left">lpushx skills Node Golang Java</td>
-</tr>
-<tr>
-<td align="left">lpop</td>
-<td align="left">移除列表第一个元素</td>
-<td align="left">lpop skills</td>
-</tr>
-<tr>
-<td align="left">blpop</td>
-<td align="left">移除列表第一个元素， 列表为空会阻塞，直到超时或者有可移除的元素</td>
-<td align="left">blpop skills 100</td>
-</tr>
-<tr>
-<td align="left">rpush</td>
-<td align="left">将一个或多个值插入到列表尾部</td>
-<td align="left">rpush skills Node Golang Java</td>
-</tr>
-<tr>
-<td align="left">rpushx</td>
-<td align="left">将一个或多个值插入到已存在的列表尾部</td>
-<td align="left">rpushx skills Node Golang Java</td>
-</tr>
-<tr>
-<td align="left">rpop</td>
-<td align="left">移除列表最后一个个元素</td>
-<td align="left">rpop skills</td>
-</tr>
-<tr>
-<td align="left">brpop</td>
-<td align="left">移除列表最后一个个元素， 列表为空会阻塞，直到超时或者有可移除的元素</td>
-<td align="left">brpop skills 100</td>
-</tr>
-<tr>
-<td align="left">brpoplpush</td>
-<td align="left">从列表中弹出一个值，将弹出的元素插入到另外一个列表中并返回它</td>
-<td align="left">brpoplpush skills list1 500</td>
-</tr>
-<tr>
-<td align="left">lindex</td>
-<td align="left">通过索引获取列表中的元素</td>
-<td align="left">lindex skills 1</td>
-</tr>
-<tr>
-<td align="left">lset</td>
-<td align="left">通过索引来设置元素的值</td>
-<td align="left">lset skills 0 Python</td>
-</tr>
-<tr>
-<td align="left">llen</td>
-<td align="left">获取列表长度</td>
-<td align="left">llen skills</td>
-</tr>
-<tr>
-<td align="left">lrange</td>
-<td align="left">获取列表指定范围内的元素</td>
-<td align="left">lrange skills 1 2</td>
-</tr>
-<tr>
-<td align="left">lrem</td>
-<td align="left">根据参数 COUNT 的值，移除列表中与参数 VALUE 相等的元素</td>
-<td align="left">lrem skills 0 node</td>
-</tr>
-<tr>
-<td align="left">ltrim</td>
-<td align="left">修剪列表，只保留指定区间内的元素</td>
-<td align="left">ltrim skills 1 2</td>
-</tr>
-</tbody></table>
-<h3 id="Set-集合"><a href="#Set-集合" class="headerlink" title="Set (集合)"></a>Set (集合)</h3><p>Redis 的 Set 是 String 类型的无序集合。它内部的键值对是无序的唯一的，这就意味着集合中不能出现重复的数据，集合中最大的成员数为 <code>2^32 - 1</code> (4294967295)。<br>Redis 中集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)。</p>
-<table>
-<thead>
-<tr>
-<th align="left">常用命令</th>
-<th align="left">说明</th>
-<th align="left">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">sadd</td>
-<td align="left">向集合添加一个或多个元素</td>
-<td align="left">sadd skills python go java go</td>
-</tr>
-<tr>
-<td align="left">scard</td>
-<td align="left">获取集合的成员数</td>
-<td align="left">scard skills</td>
-</tr>
-<tr>
-<td align="left">sismember</td>
-<td align="left">判断是否集合中的成员</td>
-<td align="left">sismember skills go</td>
-</tr>
-<tr>
-<td align="left">smembers</td>
-<td align="left">返回集合中的所有成员</td>
-<td align="left">smembers skills</td>
-</tr>
-<tr>
-<td align="left">spop</td>
-<td align="left">随机移除并返回集合中的一个元素</td>
-<td align="left">spop skills</td>
-</tr>
-<tr>
-<td align="left">sinter</td>
-<td align="left">返回指定集合的交集</td>
-<td align="left">sinter key1 key2</td>
-</tr>
-<tr>
-<td align="left">sunion</td>
-<td align="left">返回指定集合的并集</td>
-<td align="left">sunion key1 key2</td>
-</tr>
-<tr>
-<td align="left">sdiff</td>
-<td align="left">返回指定集合的差集</td>
-<td align="left">sdiff key2 key2</td>
-</tr>
-</tbody></table>
-<h3 id="Sorted-Set-有序集合"><a href="#Sorted-Set-有序集合" class="headerlink" title="Sorted Set (有序集合)"></a>Sorted Set (有序集合)</h3><p>Redis 有序集合和集合一样也是 string 类型元素的集合,一方面它是一个 set，保证了内部 value 的唯一性，另一方面它可以给每个 value 赋予一个 score（分数），代表这个 value 的排序权重。集合中最大的成员数为 <code>2^32 - 1</code>(4294967295)。<br>Redis 正是通过分数来为集合中的成员进行从小到大的排序，有序集合的成员是唯一的,但分数(score)却可以重复。<br>集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)。</p>
-<table>
-<thead>
-<tr>
-<th align="left">常用命令</th>
-<th align="left">说明</th>
-<th align="left">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">zadd</td>
-<td align="left">添加一个或多个成员或者更新已存在成员的分数</td>
-<td align="left">zadd userscore zubin 1</td>
-</tr>
-<tr>
-<td align="left">zcard</td>
-<td align="left">获取有序集合的成员数</td>
-<td align="left">zcard userscore</td>
-</tr>
-<tr>
-<td align="left">zcount</td>
-<td align="left">获取有序集合指定区间分数的成员数</td>
-<td align="left">zcount userscore 1 3</td>
-</tr>
-<tr>
-<td align="left">zincrby</td>
-<td align="left">给指定成员的分数加上增量</td>
-<td align="left">zincrby userscore 1 zubin</td>
-</tr>
-<tr>
-<td align="left">zrange</td>
-<td align="left">返回指定区间内的成员</td>
-<td align="left">zrange userscore 0 -1</td>
-</tr>
-<tr>
-<td align="left">zrangebyscore</td>
-<td align="left">返回 score 区间内的成员</td>
-<td align="left">zrangebyscore userscore -inf +inf</td>
-</tr>
-<tr>
-<td align="left">zrem</td>
-<td align="left">移除一个或多个元素</td>
-<td align="left">zrem userscore 0 -1</td>
-</tr>
-<tr>
-<td align="left">zrevrange</td>
-<td align="left">返回指定分数区间内的成员,按分数递减</td>
-<td align="left">zrevrange userscore 0 -1</td>
-</tr>
-<tr>
-<td align="left">zrevrank</td>
-<td align="left">返回成员 member 的排名</td>
-<td align="left">zrevrank userscore zubin</td>
-</tr>
-<tr>
-<td align="left">zscore</td>
-<td align="left">返回 score 的 score 值</td>
-<td align="left">zscore userscore zubin</td>
-</tr>
-</tbody></table>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-09-03T07:00:29.000Z" title="9/3/2018, 3:00:29 PM">2018-09-03</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">2 分钟读完 (大约347个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/adc3b0ca.html">数据库设计-约束</a></h1><div class="content"><p>数据库约束是为了保证数据的完整性(正确性)而实现的一套机制。主要分为五大约束：</p>
-<ol>
-<li><strong>主键约束</strong>（Primay Key Coustraint）： 唯一性，非空性</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 添加主键约束（将UserId作为主键）</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> UserId</span><br><span class="line">　　 <span class="keyword">add</span> <span class="keyword">constraint</span> PK_UserId <span class="keyword">primary</span> key (UserId);</span><br></pre></td></tr></table></figure>
+<article>
 
-<ol start="2">
-<li><strong>唯一约束</strong> （Unique Counstraint）：唯一性，可以空，但只能有一个</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 添加唯一约束（身份证号唯一，因为每个人的都不一样）</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> UserInfo</span><br><span class="line">　　 <span class="keyword">add</span> <span class="keyword">constraint</span> UQ_IDNumber <span class="keyword">unique</span>(IdentityCardNumber);</span><br></pre></td></tr></table></figure>
+  <h2 class="article-title  category">数据库</h2>
 
-<ol start="3">
-<li><strong>检查约束</strong> （Check Counstraint）：对该列数据的范格式的限制（如：年性别等）</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 添加检查约束 （对年龄加以限定 <span class="number">20</span><span class="number">-40</span> 岁之间）</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> UserInfo</span><br><span class="line">　　 <span class="keyword">add</span> <span class="keyword">constraint</span> CK_UserAge <span class="keyword">check</span> (UserAge <span class="keyword">between</span> <span class="number">20</span> <span class="keyword">and</span> <span class="number">40</span>);</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> UserInfo</span><br><span class="line">　　 <span class="keyword">add</span> <span class="keyword">constraint</span> CK_UserSex <span class="keyword">check</span> (UserSex<span class="operator">=</span>’男’ <span class="keyword">or</span> UserSex<span class="operator">=</span>’女′);</span><br></pre></td></tr></table></figure>
+  <div class="archive">
+    
+      <div class="post archive">
+        <div class="archive-post">
+          <time datetime="2020-11-02T09:17:43.000Z">
+            <a href="/blog/89fba6c2.html">2020-11-02</a>
+          </time>
+          
+            <h3 class="archive-title"><a href="/blog/89fba6c2.html"><span>MySQL临时表</span></a></h3>
+          
+        </div>
+      </div>
+    
+      <div class="post archive">
+        <div class="archive-post">
+          <time datetime="2020-07-10T07:05:06.000Z">
+            <a href="/blog/2669ab64.html">2020-07-10</a>
+          </time>
+          
+            <h3 class="archive-title"><a href="/blog/2669ab64.html"><span>redis cluster的批量操作</span></a></h3>
+          
+        </div>
+      </div>
+    
+      <div class="post archive">
+        <div class="archive-post">
+          <time datetime="2020-05-17T03:10:08.000Z">
+            <a href="/blog/cd3a8f32.html">2020-05-17</a>
+          </time>
+          
+            <h3 class="archive-title"><a href="/blog/cd3a8f32.html"><span>redis的过期策略和内存淘汰</span></a></h3>
+          
+        </div>
+      </div>
+    
+      <div class="post archive">
+        <div class="archive-post">
+          <time datetime="2020-02-27T03:54:29.000Z">
+            <a href="/blog/36ce36ae.html">2020-02-27</a>
+          </time>
+          
+            <h3 class="archive-title"><a href="/blog/36ce36ae.html"><span>MongoDB索引笔记</span></a></h3>
+          
+        </div>
+      </div>
+    
+      <div class="post archive">
+        <div class="archive-post">
+          <time datetime="2019-03-15T07:29:09.000Z">
+            <a href="/blog/6fedc606.html">2019-03-15</a>
+          </time>
+          
+            <h3 class="archive-title"><a href="/blog/6fedc606.html"><span>记一次MySQL大表空间收缩</span></a></h3>
+          
+        </div>
+      </div>
+    
+      <div class="post archive">
+        <div class="archive-post">
+          <time datetime="2019-01-13T02:37:13.000Z">
+            <a href="/blog/6dd28e9b.html">2019-01-13</a>
+          </time>
+          
+            <h3 class="archive-title"><a href="/blog/6dd28e9b.html"><span>MySQL索引优化</span></a></h3>
+          
+        </div>
+      </div>
+    
+      <div class="post archive">
+        <div class="archive-post">
+          <time datetime="2019-01-05T02:13:33.000Z">
+            <a href="/blog/43a71ae4.html">2019-01-05</a>
+          </time>
+          
+            <h3 class="archive-title"><a href="/blog/43a71ae4.html"><span>MySQL索引小结</span></a></h3>
+          
+        </div>
+      </div>
+    
+      <div class="post archive">
+        <div class="archive-post">
+          <time datetime="2018-09-20T11:41:35.000Z">
+            <a href="/blog/46c25054.html">2018-09-20</a>
+          </time>
+          
+            <h3 class="archive-title"><a href="/blog/46c25054.html"><span>MongoDB-aggregate用法</span></a></h3>
+          
+        </div>
+      </div>
+    
+      <div class="post archive">
+        <div class="archive-post">
+          <time datetime="2018-09-14T11:18:44.000Z">
+            <a href="/blog/553331a9.html">2018-09-14</a>
+          </time>
+          
+            <h3 class="archive-title"><a href="/blog/553331a9.html"><span>Redis基础数据类型</span></a></h3>
+          
+        </div>
+      </div>
+    
+      <div class="post archive">
+        <div class="archive-post">
+          <time datetime="2018-09-03T07:00:29.000Z">
+            <a href="/blog/adc3b0ca.html">2018-09-03</a>
+          </time>
+          
+            <h3 class="archive-title"><a href="/blog/adc3b0ca.html"><span>数据库设计-约束</span></a></h3>
+          
+        </div>
+      </div>
+    
+    <nav class="pagination">
+  
+  
+  <a href="/categories/数据库/page/2/" class="pagination-next">下一页</a>
+  
+</nav>
+  </div>
 
-<ol start="4">
-<li><strong>默认约束</strong> （Default Counstraint）：该数据的默认值</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 添加默认约束（如果地址不填 默认为“地址不详”）</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> UserInfo</span><br><span class="line">　　 <span class="keyword">add</span> <span class="keyword">constraint</span> DF_UserAddress <span class="keyword">default</span> (‘地址不详’) <span class="keyword">for</span> UserAddress;</span><br></pre></td></tr></table></figure>
+</article>
+    </main>
 
-<ol start="5">
-<li><strong>外键约束</strong> （Foreign Key Counstraint）：需要建立两表间的关系并引用主表的列</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 添加外键约束 (主表 UserInfo 和从表 UserOrder 建立关系，关联字段 UserId)</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> UserOrder</span><br><span class="line">　　 <span class="keyword">add</span> <span class="keyword">constraint</span> FK_UserId_UserId <span class="keyword">foreign</span> key(UserId)<span class="keyword">references</span> UserInfo(UserId);</span><br></pre></td></tr></table></figure></div><a class="article-more button is-small is-size-7" href="/blog/adc3b0ca.html#more">阅读更多</a></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous is-invisible is-hidden-mobile"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/page/0/">上一页</a></div><div class="pagination-next"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/page/2/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link is-current" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">1</a></li><li><a class="pagination-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/page/2/">2</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Zubin"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Zubin</p><p class="is-size-6 is-block">Later Equals Never</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">64</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">28</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/zubinzhang" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/zubinzhang"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/JavaScript/"><span class="level-start"><span class="level-item">JavaScript</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%85%B6%E4%BB%96/"><span class="level-start"><span class="level-item">其他</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%90%8E%E7%AB%AF/"><span class="level-start"><span class="level-item">后端</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">数据库</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-01-14T09:56:14.000Z">2022-01-14</time></p><p class="title"><a href="/blog/29e2a71f.html">常用的字符编码</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-12-14T11:10:29.000Z">2021-12-14</time></p><p class="title"><a href="/blog/252c89c5.html">关于Rest和RPC</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-28T10:05:06.000Z">2021-11-28</time></p><p class="title"><a href="/blog/7e9f8faa.html">ubuntu下minikube安装</a></p><p class="categories"><a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-30T07:29:09.000Z">2021-06-30</time></p><p class="title"><a href="/blog/9a691d3d.html">TSL握手小记</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-31T06:55:33.000Z">2021-03-31</time></p><p class="title"><a href="/blog/3fda6034.html">API多版本控制</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/06/"><span class="level-start"><span class="level-item">六月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/11/"><span class="level-start"><span class="level-item">十一月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/02/"><span class="level-start"><span class="level-item">二月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/08/"><span class="level-start"><span class="level-item">八月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/06/"><span class="level-start"><span class="level-item">六月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/04/"><span class="level-start"><span class="level-item">四月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/03/"><span class="level-start"><span class="level-item">三月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/02/"><span class="level-start"><span class="level-item">二月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/01/"><span class="level-start"><span class="level-item">一月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/12/"><span class="level-start"><span class="level-item">十二月 2018</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/11/"><span class="level-start"><span class="level-item">十一月 2018</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/10/"><span class="level-start"><span class="level-item">十月 2018</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/09/"><span class="level-start"><span class="level-item">九月 2018</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/08/"><span class="level-start"><span class="level-item">八月 2018</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/07/"><span class="level-start"><span class="level-item">七月 2018</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/06/"><span class="level-start"><span class="level-item">六月 2018</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/05/"><span class="level-start"><span class="level-item">五月 2018</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/04/"><span class="level-start"><span class="level-item">四月 2018</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/03/"><span class="level-start"><span class="level-item">三月 2018</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/API/"><span class="tag">API</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ES6/"><span class="tag">ES6</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Express-js/"><span class="tag">Express.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/KOA/"><span class="tag">KOA</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MongoDB/"><span class="tag">MongoDB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js/"><span class="tag">Node.js</span><span class="tag">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RPC/"><span class="tag">RPC</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React/"><span class="tag">React</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Redis/"><span class="tag">Redis</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Rest/"><span class="tag">Rest</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/git/"><span class="tag">git</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/golang/"><span class="tag">golang</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/kubernetes/"><span class="tag">kubernetes</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vim/"><span class="tag">vim</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/"><span class="tag">作用域</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%8D%E7%AB%AF/"><span class="tag">前端</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%90%8E%E7%AB%AF/"><span class="tag">后端</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/"><span class="tag">字符编码</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="tag">学习笔记</span><span class="tag">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/"><span class="tag">数据库设计</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9E%B6%E6%9E%84/"><span class="tag">架构</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"><span class="tag">版本控制</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="tag">计算机网络</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%B0%E5%BD%95/"><span class="tag">记录</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%97%AD%E5%8C%85/"><span class="tag">闭包</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Zubin</a><p class="is-size-7"><span>&copy; 2022 Zubin</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
-      window.cookieconsent.initialise({
-        type: "info",
-        theme: "edgeless",
-        static: false,
-        position: "bottom-left",
-        content: {
-          message: "此网站使用Cookie来改善您的体验。",
-          dismiss: "知道了！",
-          allow: "允许使用Cookie",
-          deny: "拒绝",
-          link: "了解更多",
-          policy: "Cookie政策",
-          href: "https://www.cookiesandyou.com/",
-        },
-        palette: {
-          popup: {
-            background: "#edeff5",
-            text: "#838391"
-          },
-          button: {
-            background: "#4b81e8"
-          },
-        },
-      });
-    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
-        });</script></body></html>
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 Zubin
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
