@@ -1,197 +1,479 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>JavaScript | Zubin | Later Equals Never</title>
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>分类: JavaScript - Zubin</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Zubin Zhang"><meta name="msapplication-TileImage" content="favicon.ico"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Zubin Zhang"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="Zubin"><meta property="og:url" content="https://zubin.site/"><meta property="og:site_name" content="Zubin"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://zubin.site/img/og_image.png"><meta property="article:author" content="Zubin"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://zubin.site"},"headline":"Zubin","image":["https://zubin.site/img/og_image.png"],"author":{"@type":"Person","name":"Zubin"},"publisher":{"@type":"Organization","name":"Zubin","logo":{"@type":"ImageObject"}},"description":null}</script><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.2"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">Zubin</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">分类</a></li><li class="is-active"><a href="#" aria-current="page">JavaScript</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-01-19T08:11:56.000Z" title="1/19/2021, 4:11:56 PM">2021-01-19</time>发表</span><span class="level-item"><time dateTime="2022-01-29T03:54:46.841Z" title="1/29/2022, 11:54:46 AM">2022-01-29</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">3 分钟读完 (大约503个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/33429338.html">Express查询字符串数组解析为对象的问题</a></h1><div class="content"><p>这几天检查日志，每天总会有大量上游的调用请求出现400错误（<em>Expected type array but found type object</em>）, 这个API Get请求参数如下:</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?arr[]=value1&amp;arr[]=value2&amp;arr[]=value3...</span><br></pre></td></tr></table></figure>
+<p>进一步分析日志发现，上游的查询参数中数组是有指定索引的，比如</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?arr[<span class="number">0</span>]=value1&amp;arr[<span class="number">1</span>]=value2&amp;arr[<span class="number">2</span>]=value3...</span><br></pre></td></tr></table></figure>
+<p>而且奇怪的是并非所有的请求都有问题，只有当<code>arr[]</code>超过20个才会出现，第一反应是Express的<strong>query parser</strong>问题,将查询字符串数组解析为对象，</p>
+<p>原来Express已经不包含大部分的请求解析中间件了，如json、urlencoded、cookie等中间件都变成可配置的了，只有查询字符串解析中间件还是内置的,其中解析函数默认为<a target="_blank" rel="noopener" href="https://github.com/ljharb/qs"><strong>qs</strong></a>模块的，可以通过app上的<strong>query parse</strong>设置。</p></div><a class="article-more button is-small is-size-7" href="/blog/33429338.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-03-03T14:05:27.000Z" title="3/3/2019, 10:05:27 PM">2019-03-03</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">6 分钟读完 (大约841个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/3cba66fa.html">React中props和state的区别</a></h1><div class="content"><p>对于 React 组件而言，数据分为两种：</p>
+<ul>
+<li>props</li>
+<li>state</li>
+</ul>
+<p>React 的数据是自顶向下单向流动的,这两者有什么区别呢？</p>
+<h2 id="Props"><a href="#Props" class="headerlink" title="Props"></a>Props</h2><p>React 的核心思想就是组件化思想，组件可以将 UI 切分成一些独立的、可复用的部件，这样你就只需专注于构建每一个单独的部件。</p>
+<p>组件从概念上看就是一个<strong>函数</strong>，它可以接收任意的输入值（称之为”props”），并返回一个需要在页面上展示的 React 元素。所以可以把 props 理解为从外部传入组件内部的数据。由于 React 是<strong>单向数据流</strong>，所以 props 基本上也就是从服父级组件向子组件传递的数据。</p>
+<h3 id="只读性"><a href="#只读性" class="headerlink" title="只读性"></a>只读性</h3><p>无论是使用函数或是类来声明一个组件，它决不能修改它自己的 props。如果 props 在渲染过程中可以被改变，会导致这个组件显示的形态变得不可预测。只有通过父组件重新渲染的方式才可以把新的 props 传入组件中。所有的 React 组件必须像<strong>纯函数</strong>那样使用它们的 props。</p>
+<h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>defaultProps 可以被定义为在组件类本身上的一个属性，为该类设置默认属性。这对于未定义（undefined）的属性来说有用，而对于设为空（null）的属性并没用。</p>
+<h2 id="state"><a href="#state" class="headerlink" title="state"></a>state</h2><p>state 是什么呢？</p>
+<blockquote>
+<p>State is similar to props, but it is private and fully controlled by the component.</p>
+</blockquote>
+<p>一个组件的显示形态可以由内部状态和外部参数所决定，props 是组件外传递进来的数据，state 代表的就是 React 组件的内部状态。<br>组件或子组件都不能知道某个组件是有状态还是无状态，并且它们不应该关心某组件是被定义为一个函数还是一个类，组件可以选择将其状态作为属性传递给其子组件。</p>
+<h3 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h3><p>state 不同于 props 的一点是，state 是可以被改变的，setState 函数来修改组件 state，而且可以引发组件重新渲染。</p>
+<ul>
+<li>不要直接更新状态，不可以直接通过 <code>this.state=XX</code>的方式来修改，应当使用 setState()。</li>
+<li>状态更新可能是异步的，你不应该依靠它们的值来计算下一个状态。</li>
+<li>状态更新合并，React 可以将多个 setState() 调用合并成一个调用来提高性能。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>props 是<strong>外部</strong>传给组件的数据，而 state 是组件<strong>内部</strong>自己维护的数据，对外部是不可见的。</p>
+<p>所以，判断一个数据应该放在哪里，用下面的原则：</p>
+<ul>
+<li>如果数据由外部传入，放在 props 中。</li>
+<li>如果是组件内部状态，是否这个状态更改应该立刻引发一次组件重新渲染？如果是，放在 state 中。不是，放在成员变量中。</li>
+<li>没有 state 的叫做无状态组件，有 state 的叫做有状态组件。</li>
+<li>多用 props，少用 state。也就是多写<strong>无状态组件</strong>。</li>
+</ul>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-02-13T01:03:53.000Z" title="2/13/2019, 9:03:53 AM">2019-02-13</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">4 分钟读完 (大约610个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/8e641c9d.html">JavaScript数组随机取一部分不重复元素</a></h1><div class="content"><p>从一个 JavaScript 数组当中，<strong>随机</strong>抽取部分元素，构成新数组，要求这些元素<strong>不能重复</strong>，即随机获取不重复的数组元素。<br>这个问题很简单，相信很多人都会在几分钟内给出以下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">randomMembers1</span>(<span class="params">arr, limit</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> result = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; limit; i++) &#123;</span><br><span class="line">    result[i] = arr[<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * arr.<span class="property">length</span>)];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (result[j] === result[i]) &#123;</span><br><span class="line">        i--;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">randomMembers1</span>([<span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>], <span class="number">5</span>); <span class="comment">//[ 18, 16, 12, 17, 14 ]</span></span><br></pre></td></tr></table></figure>
 
-  
-  <meta name="author" content="Zubin">
-  
+<p>解决思路就是从第二次随机抽取的元素开始，将抽取的元素与已抽取元素相<strong>比较</strong>，如果相同，则重新抽取，并再次执行比较的操作。<br>但是这种写法存在循环语句和条件语句多层嵌套，复杂度较<strong>高</strong>，执行效率很<strong>低</strong>。随着元素的抽取越多，要比较的次数越来越多，“<strong>失败的抽取</strong>”概率越来越大。</p>
+<p>我们可以优化一下比较的逻辑，比如以下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">randomMembers2</span>(<span class="params">arr, limit</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> hash = &#123;&#125;;</span><br><span class="line">  <span class="keyword">const</span> result = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (limit &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> index = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * arr.<span class="property">length</span>);</span><br><span class="line">    <span class="keyword">if</span> (!hash[index]) &#123;</span><br><span class="line">      hash[index] = <span class="literal">true</span>;</span><br><span class="line">      result.<span class="title function_">push</span>(arr[index]);</span><br><span class="line">      limit--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">randomMembers2</span>([<span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>], <span class="number">5</span>); <span class="comment">//[ 16, 17, 13, 11, 18 ]</span></span><br></pre></td></tr></table></figure>
 
-  
+<p>和第一种方法相比，节省了第一种方法中依次比较的步骤，但依旧存在“<strong>失败抽取</strong>”的现象，而且失败抽取的概率没有发生任何变化。</p>
+<p>是否可以把抽取到的元素从数组中删除，从而避免重复抽取呢？可以利用 <strong><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/splice">splice</a></strong> 方法，将抽取到的元素从数组当中删除掉，并把返回值存储（push）到结果数组当中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">randomMembers3</span>(<span class="params">arr, limit</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> result = [];</span><br><span class="line">  <span class="keyword">let</span> num = arr.<span class="property">length</span> &gt; limit ? limit : arr.<span class="property">length</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (num &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> index = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * arr.<span class="property">length</span>);</span><br><span class="line">    result.<span class="title function_">push</span>(arr.<span class="title function_">splice</span>(index, <span class="number">1</span>)[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    num--;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  
+<p>问题就是这种方法会修改源数组，产生<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%87%BD%E6%95%B0%E5%89%AF%E4%BD%9C%E7%94%A8">副作用</a>,抽取的元素会从数组中删除。我们可以新建一个数组保存原来数组的下标，从下标数组中进行抽取。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">randomMembers4</span>(<span class="params">arr, limit</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> result = [];</span><br><span class="line">  <span class="keyword">const</span> keyList = [...arr.<span class="title function_">keys</span>()];</span><br><span class="line">  <span class="keyword">let</span> num = arr.<span class="property">length</span> &gt; limit ? limit : arr.<span class="property">length</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (num &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> index = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * keyList.<span class="property">length</span>);</span><br><span class="line">    <span class="keyword">const</span> key = keyList.<span class="title function_">splice</span>(index, <span class="number">1</span>)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    result.<span class="title function_">push</span>(arr[key]);</span><br><span class="line"></span><br><span class="line">    num--;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<p><a target="_blank" rel="noopener" href="https://github.com/zubincheung/javascript-snippet/blob/master/src/random-members/index.js">完整代码</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-02-10T10:00:55.000Z" title="2/10/2019, 6:00:55 PM">2019-02-10</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">1 分钟读完 (大约151个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/42719bd.html">安装指定版本node</a></h1><div class="content"><p>mac 环境下,使用 homebrew 安装的 node, 默认是最高版本,如何安装指定版本的 node 呢?</p>
+<ol>
+<li><p>如果之前使用 <code>brew install node</code> 安装过 node,需要先执行<code>brew unlink node</code> 来<strong>解绑</strong>node。</p>
+</li>
+<li><p>查找可用的 node 版本 <code>brew search node</code>。</p>
+</li>
+<li><p>安装你需要的版本, 比如 <code>brew install node@10</code>。</p>
+</li>
+<li><p>然后 <code>brew link node@10</code>, 这一步可能会报错, 按照提示执行命令就 ok 了, 比如我最后执行的是 <code>brew link --overwrite --force node@10</code>。</p>
+</li>
+</ol>
+<p>node -v 不出意外, 就安装好了你想要的 node 版本。</p>
+<p>参考文档:</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c5c298486dbd">https://www.jianshu.com/p/c5c298486dbd</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-01-22T03:31:39.000Z" title="1/22/2019, 11:31:39 AM">2019-01-22</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">9 分钟读完 (大约1280个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/42728bd.html">JavaScript实现四则混合运算</a></h1><div class="content"><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近在项目中需要自己解析四则混合运算，如果只是简单的加减乘除运算，我相信对大家来说没有任何困难，但是实现带括号的四则运算，还是有一定的难度的。</p>
+<ul>
+<li>操作数：小数、整数</li>
+<li>运算符：加、减、乘、除</li>
+<li>分界符：圆括号 ( ) ， 用于指示运算的先后顺序</li>
+</ul>
+<p>这里使用<strong>逆波兰表达式</strong>解决数值运算以及括号带来的优先级提升问题。</p>
+<h2 id="逆波兰表达式"><a href="#逆波兰表达式" class="headerlink" title="逆波兰表达式"></a>逆波兰表达式</h2><ul>
+<li><p>中缀表达式(Infix Notation)<br>是一个通用的算术或逻辑公式表示方法， 操作符是以中缀形式处于操作数的中间。比如<code>1 + 2 + 3</code></p>
+</li>
+<li><p>前缀表达式(Prefix Notation)<br>是指将运算符写在前面、操作数写在后面、不包含括号的表达式，而且为了纪念其发明者波兰数学家 Jan Lukasiewicz 所以前缀表达式也叫做<strong>波兰表达式</strong>。比如<code>- 1 + 2 3</code></p>
+</li>
+<li><p>后缀表达式(Postfix Notation)<br>与之相反，是指运算符写在操作数后面的不含括号的算术表达式，也叫做<strong>逆波兰表达式</strong>。比如<code>1 2 3 + -</code></p>
+</li>
+</ul>
+<p>前后缀表达式的出现是为了方便计算机处理，它的运算符是按照一定的顺序出现，所以求值过程中并不需要使用括号来指定运算顺序，也不需要考虑运算符号（比如加减乘除）的优先级。<strong>逆波兰表达式</strong>在编译技术中有着普遍的应用。</p>
+<h3 id="中缀表达式转换成后缀表达式算法："><a href="#中缀表达式转换成后缀表达式算法：" class="headerlink" title="中缀表达式转换成后缀表达式算法："></a>中缀表达式转换成后缀表达式算法：</h3><ol>
+<li>从左至右扫描一中缀表达式。</li>
+<li>若读取的是操作数，则判断该操作数的类型，并将该操作数存入操作数堆栈</li>
+<li>若读取的是运算符：<ol>
+<li>该运算符为左括号”(“，则直接存入运算符堆栈。</li>
+<li>该运算符为右括号”)”，则输出运算符堆栈中的运算符到操作数堆栈，直到遇到左括号为止。</li>
+<li>该运算符为非括号运算符：<ol>
+<li>若运算符堆栈栈顶的运算符为括号，则直接存入运算符堆栈。</li>
+<li>若比运算符堆栈栈顶的运算符优先级高或相等，则直接存入运算符堆栈。</li>
+<li>若比运算符堆栈栈顶的运算符优先级低或者优先级相等，则输出栈顶运算符到操作数堆栈，直到比运算符堆栈栈顶的运算符优先级低或者为空时才将当前运算符压入运算符堆栈。</li>
+</ol>
+</li>
+<li>当表达式读取完成后运算符堆栈中尚有运算符时，则依序取出运算符到操作数堆栈，直到运算符堆栈为空。</li>
+</ol>
+</li>
+</ol>
+<p>流程图如下所示：<br><img src="https://github.com/zubincheung/blog-images/blob/master/2018/reverse-polish.jpg?raw=true" alt=" "></p>
+<h3 id="逆波兰表达式求值算法："><a href="#逆波兰表达式求值算法：" class="headerlink" title="逆波兰表达式求值算法："></a>逆波兰表达式求值算法：</h3><ol>
+<li>循环扫描语法单元的项目。</li>
+<li>如果扫描的项目是操作数，则将其压入操作数堆栈，并扫描下一个项目。</li>
+<li>如果扫描的项目是一个二元运算符，则对栈的顶上两个操作数执行该运算。</li>
+<li>如果扫描的项目是一个一元运算符，则对栈的最顶上操作数执行该运算。</li>
+<li>将运算结果重新压入堆栈。</li>
+<li>重复步骤 2-5，堆栈中即为结果值。</li>
+</ol>
+<h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><ul>
+<li>中缀表达式转换成逆波兰表达式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> operatorRand = &#123;</span><br><span class="line">  <span class="string">&#x27;+&#x27;</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="string">&#x27;-&#x27;</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="string">&#x27;*&#x27;</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="string">&#x27;/&#x27;</span>: <span class="number">2</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 中缀表达式转换成逆波兰表达式</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string[]</span>&#125; str 中缀表达式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">convert</span>(<span class="params">inputArr</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title class_">Array</span>.<span class="title function_">isArray</span>(inputArr) || inputArr.<span class="property">length</span> === <span class="number">0</span>) <span class="keyword">return</span> [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> operatorArr = [];</span><br><span class="line">  <span class="keyword">const</span> outputArr = [];</span><br><span class="line"></span><br><span class="line">  inputArr.<span class="title function_">forEach</span>(<span class="function"><span class="params">input</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="title class_">Number</span>.<span class="built_in">isNaN</span>(<span class="title class_">Number</span>(input))) &#123;</span><br><span class="line">      <span class="comment">// 如果是数字，只接输出</span></span><br><span class="line">      outputArr.<span class="title function_">push</span>(input);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (input === <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 如果是左括号，入操作符栈</span></span><br><span class="line">      operatorArr.<span class="title function_">push</span>(input);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (input === <span class="string">&#x27;)&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 如果是右括号，循环输出，知道匹配到左括号为止</span></span><br><span class="line">      <span class="keyword">while</span> (operatorArr.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> operator = operatorArr.<span class="title function_">pop</span>();</span><br><span class="line">        <span class="keyword">if</span> (operator === <span class="string">&#x27;(&#x27;</span>) <span class="keyword">break</span>;</span><br><span class="line">        outputArr.<span class="title function_">push</span>(operator);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 如果是运算符</span></span><br><span class="line">      <span class="keyword">while</span> (operatorArr.<span class="property">length</span> &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> topOperator = operatorArr[operatorArr.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果运算符栈为空，或者栈顶运算符是(，或者当前运算符优先级比栈顶运算符优先级高</span></span><br><span class="line">        <span class="keyword">if</span> (</span><br><span class="line">          operatorArr.<span class="property">length</span> === <span class="number">0</span> ||</span><br><span class="line">          topOperator === <span class="string">&#x27;(&#x27;</span> ||</span><br><span class="line">          operatorRand[input] &gt; operatorRand[topOperator]</span><br><span class="line">        ) &#123;</span><br><span class="line">          operatorArr.<span class="title function_">push</span>(input);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          outputArr.<span class="title function_">push</span>(operatorArr.<span class="title function_">pop</span>());</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 输入循环结束，如果运算符栈不为空，循环输出</span></span><br><span class="line">  <span class="keyword">while</span> (operatorArr.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    outputArr.<span class="title function_">push</span>(operatorArr.<span class="title function_">pop</span>());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> outputArr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  
+<ul>
+<li>逆波兰算法求值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">compute</span>(<span class="params">leftNum, rightNum, operator</span>) &#123;</span><br><span class="line">  <span class="keyword">switch</span> (operator) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> leftNum + rightNum;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> leftNum - rightNum;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> leftNum * rightNum;</span><br><span class="line">    <span class="attr">default</span>:</span><br><span class="line">      <span class="comment">// 除法</span></span><br><span class="line">      <span class="keyword">return</span> leftNum / rightNum;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 计算逆波兰表达式</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; str 逆波兰表达式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">count</span>(<span class="params">reversePolishArr</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title class_">Array</span>.<span class="title function_">isArray</span>(reversePolishArr) || reversePolishArr.<span class="property">length</span> === <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> tmpArr = [];</span><br><span class="line"></span><br><span class="line">  reversePolishArr.<span class="title function_">forEach</span>(<span class="function"><span class="params">input</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="title class_">Number</span>.<span class="built_in">isNaN</span>(<span class="title class_">Number</span>(input))) &#123;</span><br><span class="line">      <span class="comment">// 数字接直接push</span></span><br><span class="line">      tmpArr.<span class="title function_">push</span>(<span class="title class_">Number</span>(input));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 运算符</span></span><br><span class="line">      <span class="keyword">const</span> num1 = tmpArr.<span class="title function_">pop</span>();</span><br><span class="line">      <span class="keyword">const</span> num2 = tmpArr.<span class="title function_">pop</span>();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">isNaN</span>(num1) || <span class="built_in">isNaN</span>(num2)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">`无效的表达式：<span class="subst">$&#123;reversePolishArr.join(<span class="string">&#x27;,&#x27;</span>)&#125;</span>`</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      tmpArr.<span class="title function_">push</span>(<span class="title function_">compute</span>(num2, num1, input));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Number</span>(tmpArr[<span class="number">0</span>].<span class="title function_">toFixed</span>(<span class="number">3</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  <meta property="og:site_name" content="Zubin"/>
+<p>完整代码请参考：<a target="_blank" rel="noopener" href="https://github.com/zubincheung/js-rpn">https://github.com/zubincheung/js-rpn</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-12-28T09:13:19.000Z" title="12/28/2018, 5:13:19 PM">2018-12-28</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">5 分钟读完 (大约786个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/76482d89.html">日志框架winston的使用</a></h1><div class="content"><p>日志对于问题定位、调试，系统性能调优至关重要，尤其是系统复杂以及在线运行的情况下。之前的项目日志输出一直用 log4js,输出到一个文件，最近对那一块进行重构。</p>
+<p>分别考虑了两款 Node.js 框架，分别是<strong>Bunyan</strong> 和 <strong>Winston</strong>。</p>
+<ul>
+<li>Winston 是 Node.js 最流行的日志框架之一，设计为一个简单通用的日志库，支持多传输</li>
+<li>Bunyan 以略微不同的方式处理结构化，机器可读性被重点对待。实际上就是 JSON.stringify 的一个输出。</li>
+</ul>
+<h3 id="预期效果"><a href="#预期效果" class="headerlink" title="预期效果"></a>预期效果</h3><ul>
+<li>日志分级</li>
+<li>根据不同的代码分层来产生不同的 log 输出到不同的文件。</li>
+<li>输出到 log 文件同时还可以选择输出到标准输出。</li>
+<li>自定义格式化日志输出，输出到标准输出的格式便于读取，输出到 log 文件的格式便于分析。</li>
+<li>按天自动切割日志文件。</li>
+</ul>
+<h3 id="为何选择-winston"><a href="#为何选择-winston" class="headerlink" title="为何选择 winston"></a>为何选择 winston</h3><ul>
+<li>github start 数多。</li>
+<li>更加灵活，可以灵活的组织 transport，来完成比较复杂的日志输出任务。</li>
+<li>日志格式为 json 字符串，方便后期分析，当然可以自定义 format.</li>
+<li>支持简单的 log 分析，Profiling。</li>
+<li>支持 stream Api。</li>
+<li>简单 Log Query Api，当然无法和专业的日志分析工具比。</li>
+</ul>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><h4 id="定义标准输出-Transport"><a href="#定义标准输出-Transport" class="headerlink" title="定义标准输出 Transport"></a>定义标准输出 Transport</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ConsoleTransport</span> <span class="keyword">extends</span> <span class="title class_ inherited__">winston.transports.Console</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">options</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(options);</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">format</span> = winston.<span class="property">format</span>.<span class="title function_">combine</span>(</span><br><span class="line">      winston.<span class="title function_">format</span>(<span class="function"><span class="params">info</span> =&gt;</span> &#123;</span><br><span class="line">        info.<span class="property">hostname</span> = <span class="title function_">hostname</span>();</span><br><span class="line">        info.<span class="property">pid</span> = process.<span class="property">pid</span>;</span><br><span class="line">        info.<span class="property">level</span> = info.<span class="property">level</span>.<span class="title function_">toUpperCase</span>();</span><br><span class="line">        <span class="keyword">return</span> info;</span><br><span class="line">      &#125;)(),</span><br><span class="line">      winston.<span class="property">format</span>.<span class="title function_">timestamp</span>(&#123; <span class="attr">format</span>: <span class="string">&#x27;YYYY-MM-DD HH:mm:ss,SSSS&#x27;</span> &#125;),</span><br><span class="line">      winston.<span class="property">format</span>.<span class="title function_">ms</span>(),</span><br><span class="line">      winston.<span class="property">format</span>.<span class="title function_">colorize</span>(),</span><br><span class="line">      winston.<span class="property">format</span>.<span class="title function_">printf</span>(options.<span class="property">formatter</span>),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
+<h4 id="定义文件输出"><a href="#定义文件输出" class="headerlink" title="定义文件输出"></a>定义文件输出</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> winston = <span class="built_in">require</span>(<span class="string">&#x27;winston&#x27;</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;winston-daily-rotate-file&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FileTransport</span> <span class="keyword">extends</span> <span class="title class_ inherited__">winston.transports.DailyRotateFile</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">options</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(options);</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">datePattern</span> = <span class="string">&#x27;YYYY-MM-DD&#x27;</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">zippedArchive</span> = <span class="literal">true</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">maxSize</span> = <span class="string">&#x27;100m&#x27;</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">maxFiles</span> = <span class="string">&#x27;14d&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> defaultFormatter = winston.<span class="property">format</span>.<span class="title function_">combine</span>(</span><br><span class="line">      winston.<span class="title function_">format</span>(<span class="function"><span class="params">info</span> =&gt;</span> &#123;</span><br><span class="line">        info.<span class="property">hostname</span> = <span class="title function_">hostname</span>();</span><br><span class="line">        info.<span class="property">pid</span> = process.<span class="property">pid</span>;</span><br><span class="line">        info.<span class="property">level</span> = info.<span class="property">level</span>.<span class="title function_">toUpperCase</span>();</span><br><span class="line">        <span class="keyword">return</span> info;</span><br><span class="line">      &#125;)(),</span><br><span class="line">      winston.<span class="property">format</span>.<span class="title function_">timestamp</span>(&#123; <span class="attr">format</span>: <span class="string">&#x27;YYYY-MM-DD HH:mm:ss,SSSS&#x27;</span> &#125;),</span><br><span class="line">      winston.<span class="property">format</span>.<span class="title function_">ms</span>(),</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (options.<span class="property">json</span>) &#123;</span><br><span class="line">      <span class="comment">// 输出json格式</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">format</span> = winston.<span class="property">format</span>.<span class="title function_">combine</span>(</span><br><span class="line">        defaultFormatter,</span><br><span class="line">        winston.<span class="property">format</span>.<span class="title function_">json</span>(options.<span class="property">formatter</span>),</span><br><span class="line">      );</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">format</span> = winston.<span class="property">format</span>.<span class="title function_">combine</span>(</span><br><span class="line">        defaultFormatter,</span><br><span class="line">        winston.<span class="property">format</span>.<span class="title function_">printf</span>(options.<span class="property">formatter</span>),</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Zubin" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-<meta name="generator" content="Hexo 5.4.2"></head>
+<h4 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;app&#x27;</span>,</span><br><span class="line">  <span class="attr">module</span>: <span class="string">&#x27;app&#x27;</span>,</span><br><span class="line">  <span class="attr">filePath</span>: <span class="string">&#x27;./logs&#x27;</span>,</span><br><span class="line">  <span class="attr">formatter</span>: <span class="function"><span class="params">meta</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;meta.timestamp&#125;</span> <span class="subst">$&#123;meta.level&#125;</span> <span class="subst">$&#123;meta.hostname&#125;</span> <span class="subst">$&#123;meta.pid&#125;</span> (<span class="subst">$&#123;meta.ms&#125;</span>) [<span class="subst">$&#123;</span></span></span><br><span class="line"><span class="subst"><span class="string">      meta.<span class="variable language_">module</span></span></span></span><br><span class="line"><span class="subst"><span class="string">    &#125;</span>] <span class="subst">$&#123;meta.message&#125;</span>`</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">consoleLevel</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">  <span class="attr">json</span>: <span class="literal">false</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> consoleTransport = <span class="keyword">new</span> <span class="title class_">ConsoleTransport</span>(&#123;</span><br><span class="line">  <span class="attr">level</span>: options.<span class="property">consoleLevel</span>,</span><br><span class="line">  <span class="attr">name</span>: options.<span class="property">name</span>,</span><br><span class="line">  <span class="attr">formatter</span>: options.<span class="property">consoleFormatter</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> infoTransport = <span class="keyword">new</span> <span class="title class_">FileTransport</span>(&#123;</span><br><span class="line">  <span class="attr">level</span>: <span class="string">&#x27;info&#x27;</span>,</span><br><span class="line">  <span class="attr">name</span>: options.<span class="property">name</span>,</span><br><span class="line">  <span class="attr">filename</span>: <span class="title function_">join</span>(options.<span class="property">filePath</span>, <span class="string">`info/<span class="subst">$&#123;options.name&#125;</span>-info-%DATE%.log`</span>),</span><br><span class="line">  <span class="attr">formatter</span>: options.<span class="property">formatter</span>,</span><br><span class="line">  <span class="attr">json</span>: options.<span class="property">json</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> errorTransport = <span class="keyword">new</span> <span class="title class_">FileTransport</span>(&#123;</span><br><span class="line">  <span class="attr">level</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">  <span class="attr">name</span>: options.<span class="property">name</span>,</span><br><span class="line">  <span class="attr">filename</span>: <span class="title function_">join</span>(options.<span class="property">filePath</span>, <span class="string">&#x27;error/error-%DATE%.log&#x27;</span>),</span><br><span class="line">  <span class="attr">formatter</span>: options.<span class="property">formatter</span>,</span><br><span class="line">  <span class="attr">json</span>: options.<span class="property">json</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> transports = [consoleTransport, infoTransport, errorTransport];</span><br><span class="line"><span class="keyword">const</span> logger = winston.<span class="title function_">createLogger</span>(&#123; transports &#125;);</span><br><span class="line"></span><br><span class="line">logger.<span class="title function_">info</span>(<span class="string">&#x27;log1&#x27;</span>);</span><br><span class="line">logger.<span class="title function_">error</span>(<span class="string">&#x27;error 1&#x27;</span>);</span><br></pre></td></tr></table></figure>
 
+<p>代码地址为：<a target="_blank" rel="noopener" href="https://github.com/zubincheung/cw-logger-winston">https://github.com/zubincheung/cw-logger-winston</a></p>
+<h3 id="输出效果"><a href="#输出效果" class="headerlink" title="输出效果"></a>输出效果</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">2018-12-30 10:07:28,4605 INFO zubin-pc.local 59468 (+0ms) [app] app log 1</span><br><span class="line">2018-12-30 10:07:28,4695 ERROR zubin-pc.local 59468 (+1ms) [app] Error: app error 1</span><br><span class="line">Error: app error 1</span><br><span class="line">    at Object.it (/Users/zubincheung/ciwong/cw-logger-winston/test/cw-logger.test.js:61:35)</span><br><span class="line">    at Object.asyncJestTest (/Users/zubincheung/ciwong/cw-logger-winston/node_modules/jest-jasmine2/build/jasmine_async.js:108:37)</span><br><span class="line">    at resolve (/Users/zubincheung/ciwong/cw-logger-winston/node_modules/jest-jasmine2/build/queue_runner.js:56:12)</span><br><span class="line">    at new Promise (&lt;anonymous&gt;)</span><br><span class="line">    at mapper (/Users/zubincheung/ciwong/cw-logger-winston/node_modules/jest-jasmine2/build/queue_runner.js:43:19)</span><br><span class="line">    at promise.then (/Users/zubincheung/ciwong/cw-logger-winston/node_modules/jest-jasmine2/build/queue_runner.js:87:41)</span><br><span class="line">    at process.internalTickCallback (internal/process/next_tick.js:77:7)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-11-25T05:40:27.000Z" title="11/25/2018, 1:40:27 PM">2018-11-25</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">5 分钟读完 (大约747个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/b2c34d5.html">JavaScript深入之类型转换</a></h1><div class="content"><p>JavaScript 是弱类型的语言，它的取值非常灵活。你期望一种类型值的时候，你可以提供任何类型的值，JavaScript 将根据需要自行转换类型，在 JavaScript 中通常将它们统称为 <strong>强制类型转换</strong>。</p>
+<p><a target="_blank" rel="noopener" href="https://www.ecma-international.org/ecma-262/#sec-toprimitive">ECMAScript 规范</a>中<a target="_blank" rel="noopener" href="https://www.ecma-international.org/ecma-262/#sec-type-conversion">Type Conversion</a> 章节中定义了转换规则。这里我们着重介绍 **<a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-toprimitive">ToPrimitive</a><strong>、</strong><a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-toboolean">ToBoolean</a>**、 <strong><a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-tonumber">ToNumber</a></strong> 和 <strong><a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-tostring">ToString</a></strong> 。</p>
+<h2 id="ToPrimitive"><a href="#ToPrimitive" class="headerlink" title="ToPrimitive"></a>ToPrimitive</h2><p>在 JavaScript 中，想要将对象转换成原始值，必然会调用 toPrimitive()内部函数，那么它是如何工作的呢？</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">ToPrimitive</span><span class="params">(input [, PreferredType])</span></span></span><br><span class="line"><span class="selector-tag">input</span> 是输入的值，preferedType 是期望转换的类型，</span><br></pre></td></tr></table></figure>
 
-<body>
-<div class="blog">
-  <div class="content">
+<table>
+<thead>
+<tr>
+<th align="left">输入类型</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Undefined</td>
+<td align="left">返回 input 自身</td>
+</tr>
+<tr>
+<td align="left">Null</td>
+<td align="left">返回 input 自身</td>
+</tr>
+<tr>
+<td align="left">Boolean</td>
+<td align="left">返回 input 自身</td>
+</tr>
+<tr>
+<td align="left">Number</td>
+<td align="left">返回 input 自身</td>
+</tr>
+<tr>
+<td align="left">String</td>
+<td align="left">返回 input 自身</td>
+</tr>
+<tr>
+<td align="left">Symbol</td>
+<td align="left">返回 input 自身</td>
+</tr>
+<tr>
+<td align="left">Object</td>
+<td align="left">返回该对象的默认值。具体过程请（通过内部操作 DefaultValue ，参见 ES5 规范 8.12.8 节）</td>
+</tr>
+</tbody></table>
+<p>如果 PreferredType 是 Number，执行顺序如下：</p>
+<ol>
+<li>如果 input 为 primitive，返回。</li>
+<li>否则，input 为 Object。调用 obj.valueOf()。如果结果是 primitive，返回。</li>
+<li>否则，调用 obj.toString(). 如果结果是 primitive，返回。</li>
+<li>如果 valueOf() 和 toString() 均不返回基本类型值，会产生 TypeError 错误。</li>
+<li>如果 PreferredType 是 String，步骤 2 跟 3 互换，如果 PreferredType 为空，Date 类型默认为 String，其他都是 Number。</li>
+</ol>
+<h2 id="ToBoolean"><a href="#ToBoolean" class="headerlink" title="ToBoolean"></a>ToBoolean</h2><p>ToBoolean 运算符根据下表将其参数转换为布尔值类型的值：</p>
+<table>
+<thead>
+<tr>
+<th align="left">输入类型</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Undefined</td>
+<td align="left">false</td>
+</tr>
+<tr>
+<td align="left">Null</td>
+<td align="left">false</td>
+</tr>
+<tr>
+<td align="left">Boolean</td>
+<td align="left">结果等于输入的参数（不转换）。</td>
+</tr>
+<tr>
+<td align="left">Number</td>
+<td align="left">如果参数是 +0, -0, 或 NaN，结果为 false ；否则结果为 true。</td>
+</tr>
+<tr>
+<td align="left">String</td>
+<td align="left">如果参数参数是空字符串（其长度为零），结果为 false，否则结果为 true。</td>
+</tr>
+<tr>
+<td align="left">Object</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left">Symbol</td>
+<td align="left">true</td>
+</tr>
+</tbody></table>
+<h2 id="ToNumber"><a href="#ToNumber" class="headerlink" title="ToNumber"></a>ToNumber</h2><p>ToNumber 运算符根据下表将其参数转换为数值类型的值：</p>
+<table>
+<thead>
+<tr>
+<th align="left">输入类型</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Undefined</td>
+<td align="left">NaN</td>
+</tr>
+<tr>
+<td align="left">Null</td>
+<td align="left">+0</td>
+</tr>
+<tr>
+<td align="left">Boolean</td>
+<td align="left">如果参数是 true，结果为 1。如果参数是 false，此结果为 +0。</td>
+</tr>
+<tr>
+<td align="left">Number</td>
+<td align="left">直接返回。</td>
+</tr>
+<tr>
+<td align="left">String</td>
+<td align="left">参见下文的文法和注释。</td>
+</tr>
+<tr>
+<td align="left">Symbol</td>
+<td align="left">TypeError</td>
+</tr>
+<tr>
+<td align="left">Object</td>
+<td align="left">执行下列步骤：<br> 1. 设 primValue 为 ToPrimitive( 输入参数 , hint Number)。<br>2.返回 ToNumber(primValue)。<br></td>
+</tr>
+</tbody></table>
+<h2 id="ToString"><a href="#ToString" class="headerlink" title="ToString"></a>ToString</h2><p>ToString 运算符根据下表将其参数转换为字符串类型的值：</p>
+<table>
+<thead>
+<tr>
+<th align="left">输入类型</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Undefined</td>
+<td align="left">“undefined”</td>
+</tr>
+<tr>
+<td align="left">Null</td>
+<td align="left">“null”</td>
+</tr>
+<tr>
+<td align="left">Boolean</td>
+<td align="left">如果参数是 true，那么结果为 “true”。<br>如果参数是 false，那么结果为 “false”。</td>
+</tr>
+<tr>
+<td align="left">Number</td>
+<td align="left">详见<a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-tostring-applied-to-the-number-type">7.1.12.1NumberToString</a></td>
+</tr>
+<tr>
+<td align="left">String</td>
+<td align="left">直接返回 。</td>
+</tr>
+<tr>
+<td align="left">Symbol</td>
+<td align="left">TypeError</td>
+</tr>
+<tr>
+<td align="left">Object</td>
+<td align="left">执行下列步骤：<br>1、设 primValue 为 ToPrimitive( 输入参数 , hint String)。<br>2、返回 ToString(设 primValue 为 )。</td>
+</tr>
+</tbody></table>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.ecma-international.org/ecma-262/5.1/#sec-9">Type Conversion and Testing</a><br><a target="_blank" rel="noopener" href="https://www.ecma-international.org/ecma-262/#sec-type-conversion">Type Conversion</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-11-15T03:27:54.000Z" title="11/15/2018, 11:27:54 AM">2018-11-15</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">7 分钟读完 (大约1052个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/e4079434.html">JavaScript深入之引用类型</a></h1><div class="content"><h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><p>JavaScript 变量可以用来保存两种类型的值：基本类型值和引用类型值。基本类型值指的是 简单的数据段，包括以下 6 种基本数据类型：Undefined、Null、Boolean、Number 、 String 和 Symbol。<br>基本类型保存在栈中，存储的是具体的值，是轻量级的数据存储方式。</p>
+<h2 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h2><p>引用类型的值是保存在内存中的对象。与其他语言不同，JavaScript 不允许直接访问内存中的位置， 也就是说不能直接操作对象的内存空间。在操作对象时，实际上是在操作对象的引用而不是实际的对象。 为此，引用类型的值是按引用访问的。</p>
+<h3 id="Object-类型"><a href="#Object-类型" class="headerlink" title="Object 类型"></a>Object 类型</h3><p>Object 是一个基础类型，其他所有类型都从 Object 继承了基本的行为。<br>创建 Object 实例的方式有两种。第一种是使用 new 操作符后跟 Object 构造函数，另一种方式是使用对象字面量表示法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// new操作符创建对象</span></span><br><span class="line"><span class="keyword">let</span> person1 = <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">person.<span class="property">name</span> = <span class="string">&#x27;Zubin&#x27;</span>;</span><br><span class="line">person.<span class="property">age</span> = <span class="number">18</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 字面量表示法</span></span><br><span class="line"><span class="keyword">let</span> person2 = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Zubin&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Zubin</a>
-    </h1>
-    <p class="site-description">Later Equals Never</p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-    </ul>
-  </nav>
-</header>
+<h3 id="Array-对象"><a href="#Array-对象" class="headerlink" title="Array 对象"></a>Array 对象</h3><p>除了 Object 之外，Array 类型恐怕是 ECMAScript 中最常用的类型了。而且，ECMAScript 中 的数组与其他多数语言中的数组有着相当大的区别。</p>
+<ul>
+<li>ECMAScript 数组的每一项可以保存任何类型的数据。</li>
+<li>ECMAScript 数组的大小是可以动态调整的，即可以随着数据的添加自动增长以容 纳新增数据。</li>
+</ul>
+<h4 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h4><ol>
+<li><p>Array.from()<br>从类数组对象或者可迭代对象中创建一个新的数组实例。</p>
+</li>
+<li><p>Array.isArray()<br>用来判断某个变量是否是一个数组对象。</p>
+</li>
+<li><p>Array.of()<br>根据一组参数来创建新的数组实例，支持任意的参数数量和类型。</p>
+</li>
+</ol>
+<h4 id="数组实例的常用方法："><a href="#数组实例的常用方法：" class="headerlink" title="数组实例的常用方法："></a>数组实例的常用方法：</h4><table>
+<thead>
+<tr>
+<th align="left">方法名称</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">concat</td>
+<td align="left">用于连接两个或更多的数组并返回结果,arr1.concat(arr2)</td>
+</tr>
+<tr>
+<td align="left">join</td>
+<td align="left">把数组的所有元素放入一个字符串，元素通过制定的分隔符进行分离 arr1.join(‘,’)</td>
+</tr>
+<tr>
+<td align="left">pop</td>
+<td align="left">删除并返回数组中的最后一个元素 arr1.pop()</td>
+</tr>
+<tr>
+<td align="left">push</td>
+<td align="left">向数组的末尾添加一个或更多元素，并返回新的长度 arr1.push(1)</td>
+</tr>
+<tr>
+<td align="left">reverse</td>
+<td align="left">颠倒数组中的元素顺序,arr1.reverse()</td>
+</tr>
+<tr>
+<td align="left">shift</td>
+<td align="left">删除并返回数组中的第一个元素 arr1.shift()</td>
+</tr>
+<tr>
+<td align="left">slice</td>
+<td align="left">从某个已有的数组返回指定的元素</td>
+</tr>
+<tr>
+<td align="left">sort</td>
+<td align="left">对数组的元素进行排序 arr1.sort()</td>
+</tr>
+<tr>
+<td align="left">splice</td>
+<td align="left">删除元素，并向数组中添加新元素</td>
+</tr>
+<tr>
+<td align="left">toString</td>
+<td align="left">把数组转成字符串 arr1.toString()</td>
+</tr>
+<tr>
+<td align="left">toLocaleString</td>
+<td align="left">把数组转换为本地字符串 arr1.toLocaleString()</td>
+</tr>
+<tr>
+<td align="left">valueOf</td>
+<td align="left">返回数组对象的原始值</td>
+</tr>
+</tbody></table>
+<h3 id="Date-对象"><a href="#Date-对象" class="headerlink" title="Date 对象"></a>Date 对象</h3><p>创建 Date 实例用来处理日期和时间。Date 对象基于 1970 年 1 月 1 日（世界标准时间）起的毫秒数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> today = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="keyword">var</span> today = <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">1453094034000</span>); <span class="comment">// by timestamp(accurate to the milliseconds)</span></span><br><span class="line"><span class="keyword">var</span> birthday = <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="string">&#x27;December 17, 1995 03:24:00&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> birthday = <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="string">&#x27;1995-12-17T03:24:00&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> birthday = <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">1995</span>, <span class="number">11</span>, <span class="number">17</span>);</span><br><span class="line"><span class="keyword">var</span> birthday = <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">1995</span>, <span class="number">11</span>, <span class="number">17</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> unixTimestamp = <span class="title class_">Date</span>.<span class="title function_">now</span>(); <span class="comment">// in milliseconds</span></span><br></pre></td></tr></table></figure>
 
-    <main class="site-main posts-loop">
-    
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ol>
+<li>Date.now()<br>返回自 1970-1-1 00:00:00 UTC (世界标准时间)至今所经过的毫秒数。</li>
+<li>Date.parse()<br>解析一个表示日期的字符串，并返回从 1970-1-1 00:00:00 所经过的毫秒数。</li>
+<li>Date.UTC()<br>接受和构造函数最长形式的参数相同的参数（从 2 到 7），并返回从 1970-01-01 00:00:00 UTC 开始所经过的毫秒数。</li>
+</ol>
+<h3 id="RegExp-类型"><a href="#RegExp-类型" class="headerlink" title="RegExp 类型"></a>RegExp 类型</h3><p>类型是 ECMAScript 支持正则表达式的一个接口，提供了最基本的和一些高级的正则表 达式功能。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regex1 = <span class="regexp">/\w+/</span>;</span><br><span class="line"><span class="keyword">var</span> regex2 = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&#x27;\\w+&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(regex1);</span><br><span class="line"><span class="comment">// expected output: /\w+/</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(regex2);</span><br><span class="line"><span class="comment">// expected output: /\w+/</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(regex1 === regex2);</span><br><span class="line"><span class="comment">// expected output: false</span></span><br></pre></td></tr></table></figure>
 
-<article>
+<h3 id="Function-类型"><a href="#Function-类型" class="headerlink" title="Function 类型"></a>Function 类型</h3><p>Function 构造函数 创建一个新的 Function 对象。 在 JavaScript 中, 每个函数实际上都是一个 Function 对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = <span class="keyword">new</span> <span class="title class_">Function</span>(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;return a + b&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">sum</span>(<span class="number">2</span>, <span class="number">6</span>));</span><br><span class="line"><span class="comment">// expected output: 8</span></span><br></pre></td></tr></table></figure>
 
-  <h2 class="article-title  category">JavaScript</h2>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>MDN <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript">JavaScript</a><br><a target="_blank" rel="noopener" href="https://book.douban.com/subject/10546125/">JavaScript 高级程序设计（第 3 版）</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-11-11T03:05:13.000Z" title="11/11/2018, 11:05:13 AM">2018-11-11</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">4 分钟读完 (大约610个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/75eb6888.html">JavaScript深入之原生函数</a></h1><div class="content"><p>JavaScript 为基本数据类型值提供了封装对象，称为<strong>原生函数</strong>，常见的原生函数包括</p>
+<ul>
+<li>String()</li>
+<li>Number()</li>
+<li>Boolean()</li>
+<li>Array()</li>
+<li>Object()</li>
+<li>Function()</li>
+<li>RegExp()</li>
+<li>Date()</li>
+<li>Error()</li>
+<li>Symbol()</li>
+</ul>
+<p>它们可以被当作构造函数来使用， 但其构造出来的对象可能会和我们设想的有所 出入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&#x27;abc&#x27;</span>);</span><br><span class="line"><span class="keyword">typeof</span> a; <span class="comment">// 是&quot;object&quot;，不是&quot;String&quot;</span></span><br><span class="line">a <span class="keyword">instanceof</span> <span class="title class_">String</span>; <span class="comment">// true</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(a); <span class="comment">// &quot;[object String]&quot;</span></span><br></pre></td></tr></table></figure>
 
-  <div class="archive">
-    
-      <div class="post archive">
-        <div class="archive-post">
-          <time datetime="2021-01-19T08:11:56.000Z">
-            <a href="/blog/33429338.html">2021-01-19</a>
-          </time>
-          
-            <h3 class="archive-title"><a href="/blog/33429338.html"><span>Express查询字符串数组解析为对象的问题</span></a></h3>
-          
-        </div>
-      </div>
-    
-      <div class="post archive">
-        <div class="archive-post">
-          <time datetime="2019-03-03T14:05:27.000Z">
-            <a href="/blog/3cba66fa.html">2019-03-03</a>
-          </time>
-          
-            <h3 class="archive-title"><a href="/blog/3cba66fa.html"><span>React中props和state的区别</span></a></h3>
-          
-        </div>
-      </div>
-    
-      <div class="post archive">
-        <div class="archive-post">
-          <time datetime="2019-02-13T01:03:53.000Z">
-            <a href="/blog/8e641c9d.html">2019-02-13</a>
-          </time>
-          
-            <h3 class="archive-title"><a href="/blog/8e641c9d.html"><span>JavaScript数组随机取一部分不重复元素</span></a></h3>
-          
-        </div>
-      </div>
-    
-      <div class="homebrew archive">
-        <div class="archive-post">
-          <time datetime="2019-02-10T10:00:55.000Z">
-            <a href="/blog/42719bd.html">2019-02-10</a>
-          </time>
-          
-            <h3 class="archive-title"><a href="/blog/42719bd.html"><span>安装指定版本node</span></a></h3>
-          
-        </div>
-      </div>
-    
-      <div class="post archive">
-        <div class="archive-post">
-          <time datetime="2019-01-22T03:31:39.000Z">
-            <a href="/blog/42728bd.html">2019-01-22</a>
-          </time>
-          
-            <h3 class="archive-title"><a href="/blog/42728bd.html"><span>JavaScript实现四则混合运算</span></a></h3>
-          
-        </div>
-      </div>
-    
-      <div class="post archive">
-        <div class="archive-post">
-          <time datetime="2018-12-28T09:13:19.000Z">
-            <a href="/blog/76482d89.html">2018-12-28</a>
-          </time>
-          
-            <h3 class="archive-title"><a href="/blog/76482d89.html"><span>日志框架winston的使用</span></a></h3>
-          
-        </div>
-      </div>
-    
-      <div class="post archive">
-        <div class="archive-post">
-          <time datetime="2018-11-25T05:40:27.000Z">
-            <a href="/blog/b2c34d5.html">2018-11-25</a>
-          </time>
-          
-            <h3 class="archive-title"><a href="/blog/b2c34d5.html"><span>JavaScript深入之类型转换</span></a></h3>
-          
-        </div>
-      </div>
-    
-      <div class="post archive">
-        <div class="archive-post">
-          <time datetime="2018-11-15T03:27:54.000Z">
-            <a href="/blog/e4079434.html">2018-11-15</a>
-          </time>
-          
-            <h3 class="archive-title"><a href="/blog/e4079434.html"><span>JavaScript深入之引用类型</span></a></h3>
-          
-        </div>
-      </div>
-    
-      <div class="post archive">
-        <div class="archive-post">
-          <time datetime="2018-11-11T03:05:13.000Z">
-            <a href="/blog/75eb6888.html">2018-11-11</a>
-          </time>
-          
-            <h3 class="archive-title"><a href="/blog/75eb6888.html"><span>JavaScript深入之原生函数</span></a></h3>
-          
-        </div>
-      </div>
-    
-      <div class="post archive">
-        <div class="archive-post">
-          <time datetime="2018-11-09T04:22:13.000Z">
-            <a href="/blog/d063347b.html">2018-11-09</a>
-          </time>
-          
-            <h3 class="archive-title"><a href="/blog/d063347b.html"><span>JavaScript深入之数据类型</span></a></h3>
-          
-        </div>
-      </div>
-    
-    <nav class="pagination">
-  
-  
-  <a href="/categories/JavaScript/page/2/" class="pagination-next">下一页</a>
-  
-</nav>
-  </div>
+<p>通过构造函数（如 new String(“abc”) ）创建出来的是封装了基本类型值（如 “abc” ）的封 装对象。</p>
+<h3 id="内部属性-Class"><a href="#内部属性-Class" class="headerlink" title="内部属性[[Class]]"></a>内部属性[[Class]]</h3><p>所有 typeof 返回值为 “object” 的对象（如数组）都包含一个内部属性 [[Class]] （我们可 以把它看作一个内部的分类，而非传统的面向对象意义上的类）。这个属性无法直接访问， 一般通过 Object.prototype.toString(..) 来查看。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">// &quot;[object Array]&quot;</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(<span class="regexp">/regex-literal/i</span>); <span class="comment">// &quot;[object RegExp]&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(<span class="literal">null</span>); <span class="comment">// &quot;[object Null]&quot;</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(<span class="literal">undefined</span>); <span class="comment">// &quot;[object Undefined]&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(<span class="string">&#x27;abc&#x27;</span>); <span class="comment">// &quot;[object String]&quot;</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(<span class="number">42</span>); <span class="comment">// &quot;[object Number]&quot;</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(<span class="literal">true</span>); <span class="comment">// &quot;[object Boolean]&quot;</span></span><br></pre></td></tr></table></figure>
 
-</article>
-    </main>
+<p>内部属性和创建该对象的内建原生构造函数相对应,虽然 Null() 和 Undefined() 这样的原生构造函数并不存在，但是内部属性值仍 然是 “Null” 和 “Undefined” 。<br>其他基本类型值（如字符串、数字和布尔）的情况有所不同，它们的值被各自的封装对象自动包装，所以它们的内部属性值分别为 “String” 、 “Number” 和 “Boolean” 。</p>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>原生函数为基本数据类型值提供了该子类型所特有的方法和属性（如：String#trim() 和 Array#concat(..)）。</p>
+<p>对于简单标量基本类型值，比如 “abc” ，如果要访问它的 length 属性或 String.prototype 方法， JavaScript 引擎会自动对该值进行封装（即用相应类型的封装对象来包装它）来实现对这些属性和方法的访问。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;abc&#x27;</span>;</span><br><span class="line"></span><br><span class="line">a.<span class="property">length</span>; <span class="comment">// 3</span></span><br><span class="line">a.<span class="title function_">toUpperCase</span>(); <span class="comment">// &quot;ABC&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> <span class="title class_">Boolean</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">if</span> (!b) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Oops&#x27;</span>); <span class="comment">// 执行不到这里</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2022 Zubin
-    
-  </p>
-</footer>
-    
-    
-  </div>
-</div>
-</body>
-</html>
+<h3 id="拆封"><a href="#拆封" class="headerlink" title="拆封"></a>拆封</h3><p>如果想要得到封装对象中的基本类型值，可以使用 valueOf() 函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&#x27;abc&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> <span class="title class_">Number</span>(<span class="number">42</span>);</span><br><span class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> <span class="title class_">Boolean</span>(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">a.<span class="title function_">valueOf</span>(); <span class="comment">// &quot;abc&quot;</span></span><br><span class="line">b.<span class="title function_">valueOf</span>(); <span class="comment">// 42</span></span><br><span class="line">c.<span class="title function_">valueOf</span>(); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a target="_blank" rel="noopener" href="https://book.douban.com/subject/26854244/">你不知道的 JavaScript（中卷）</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-11-09T04:22:13.000Z" title="11/9/2018, 12:22:13 PM">2018-11-09</time>发表</span><span class="level-item"><time dateTime="2020-04-19T14:29:28.000Z" title="4/19/2020, 10:29:28 PM">2020-04-19</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/JavaScript/">JavaScript</a></span><span class="level-item">9 分钟读完 (大约1354个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/blog/d063347b.html">JavaScript深入之数据类型</a></h1><div class="content"><h3 id="一、内置类型"><a href="#一、内置类型" class="headerlink" title="一、内置类型"></a>一、内置类型</h3><p>最新的 ECMAScript 标准定义了 7 种数据类型:</p>
+<ul>
+<li>空值（null）</li>
+<li>未定义（undefined）</li>
+<li>布尔值（boolean）</li>
+<li>数字（number）</li>
+<li>字符串（string）</li>
+<li>符号（symbol，ES6 中新增）</li>
+<li>对象（object）</li>
+</ul>
+<p>除对象为“复杂类型”之外，其他统称为“基本类型”。</p></div><a class="article-more button is-small is-size-7" href="/blog/d063347b.html#more">阅读更多</a></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous is-invisible is-hidden-mobile"><a href="/categories/JavaScript/page/0/">上一页</a></div><div class="pagination-next"><a href="/categories/JavaScript/page/2/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link is-current" href="/categories/JavaScript/">1</a></li><li><a class="pagination-link" href="/categories/JavaScript/page/2/">2</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Zubin"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Zubin</p><p class="is-size-6 is-block">Later Equals Never</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>ShenZhen</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">64</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">28</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/zubinzhang" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/zubinzhang"><i class="fab fa-github"></i></a></div></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/JavaScript/"><span class="level-start"><span class="level-item">JavaScript</span></span><span class="level-end"><span class="level-item tag">20</span></span></a></li><li><a class="level is-mobile" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%85%B6%E4%BB%96/"><span class="level-start"><span class="level-item">其他</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%90%8E%E7%AB%AF/"><span class="level-start"><span class="level-item">后端</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">数据库</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-03-14T11:10:29.000Z">2022-03-14</time></p><p class="title"><a href="/blog/252c89c5.html">关于Rest和RPC</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-01-14T09:56:14.000Z">2022-01-14</time></p><p class="title"><a href="/blog/29e2a71f.html">常用的字符编码</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-28T10:05:06.000Z">2021-11-28</time></p><p class="title"><a href="/blog/7e9f8faa.html">ubuntu下minikube安装</a></p><p class="categories"><a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-30T07:29:09.000Z">2021-06-30</time></p><p class="title"><a href="/blog/9a691d3d.html">TSL握手小记</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-03-31T06:55:33.000Z">2021-03-31</time></p><p class="title"><a href="/blog/3fda6034.html">API多版本控制</a></p><p class="categories"><a href="/categories/%E5%85%B6%E4%BB%96/">其他</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">三月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/06/"><span class="level-start"><span class="level-item">六月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/01/"><span class="level-start"><span class="level-item">一月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/11/"><span class="level-start"><span class="level-item">十一月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/02/"><span class="level-start"><span class="level-item">二月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/08/"><span class="level-start"><span class="level-item">八月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/06/"><span class="level-start"><span class="level-item">六月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/04/"><span class="level-start"><span class="level-item">四月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/03/"><span class="level-start"><span class="level-item">三月 2019</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/02/"><span class="level-start"><span class="level-item">二月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/01/"><span class="level-start"><span class="level-item">一月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/12/"><span class="level-start"><span class="level-item">十二月 2018</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/11/"><span class="level-start"><span class="level-item">十一月 2018</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/10/"><span class="level-start"><span class="level-item">十月 2018</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/09/"><span class="level-start"><span class="level-item">九月 2018</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/08/"><span class="level-start"><span class="level-item">八月 2018</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/07/"><span class="level-start"><span class="level-item">七月 2018</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/06/"><span class="level-start"><span class="level-item">六月 2018</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/05/"><span class="level-start"><span class="level-item">五月 2018</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/04/"><span class="level-start"><span class="level-item">四月 2018</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2018/03/"><span class="level-start"><span class="level-item">三月 2018</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/API/"><span class="tag">API</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ES6/"><span class="tag">ES6</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Express-js/"><span class="tag">Express.js</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/KOA/"><span class="tag">KOA</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MongoDB/"><span class="tag">MongoDB</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Node-js/"><span class="tag">Node.js</span><span class="tag">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/RPC/"><span class="tag">RPC</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/React/"><span class="tag">React</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Redis/"><span class="tag">Redis</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Rest/"><span class="tag">Rest</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/git/"><span class="tag">git</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/golang/"><span class="tag">golang</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/kubernetes/"><span class="tag">kubernetes</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vim/"><span class="tag">vim</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/"><span class="tag">作用域</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%8D%E7%AB%AF/"><span class="tag">前端</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%90%8E%E7%AB%AF/"><span class="tag">后端</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/"><span class="tag">字符编码</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="tag">学习笔记</span><span class="tag">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/"><span class="tag">数据库设计</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9E%B6%E6%9E%84/"><span class="tag">架构</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"><span class="tag">版本控制</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="tag">计算机网络</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%B0%E5%BD%95/"><span class="tag">记录</span><span class="tag">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%97%AD%E5%8C%85/"><span class="tag">闭包</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">Zubin</a><p class="is-size-7"><span>&copy; 2022 Zubin</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
